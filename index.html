@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-html/tabby.min.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -12,7 +11,7 @@
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.450">
 
-  <meta name="dcterms.date" content="2024-03-20">
+  <meta name="dcterms.date" content="2024-03-15">
   <title>Reproducible Research Data Management with DataLad</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -31,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #24292e;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #24292e; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #6a737d; } /* Annotation */
+    code span.at { color: #d73a49; } /* Attribute */
+    code span.bn { color: #005cc5; } /* BaseN */
+    code span.bu { color: #d73a49; } /* BuiltIn */
+    code span.cf { color: #d73a49; } /* ControlFlow */
+    code span.ch { color: #032f62; } /* Char */
+    code span.cn { color: #005cc5; } /* Constant */
+    code span.co { color: #6a737d; } /* Comment */
+    code span.cv { color: #6a737d; } /* CommentVar */
+    code span.do { color: #6a737d; } /* Documentation */
+    code span.dt { color: #d73a49; } /* DataType */
+    code span.dv { color: #005cc5; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
+    code span.fl { color: #005cc5; } /* Float */
+    code span.fu { color: #6f42c1; } /* Function */
+    code span.im { color: #032f62; } /* Import */
+    code span.in { color: #6a737d; } /* Information */
+    code span.kw { color: #d73a49; } /* Keyword */
+    code span.op { color: #24292e; } /* Operator */
+    code span.ot { color: #6f42c1; } /* Other */
+    code span.pp { color: #d73a49; } /* Preprocessor */
+    code span.re { color: #6a737d; } /* RegionMarker */
+    code span.sc { color: #005cc5; } /* SpecialChar */
+    code span.ss { color: #032f62; } /* SpecialString */
+    code span.st { color: #032f62; } /* String */
+    code span.va { color: #e36209; } /* Variable */
+    code span.vs { color: #032f62; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
   </style>
   <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -352,7 +416,7 @@
     </div>
 </div>
 
-  <p class="date">March 20, 2024</p>
+  <p class="date">March 15, 2024</p>
 </section>
 <section id="about" class="slide level2">
 <h2>About</h2>
@@ -382,6 +446,394 @@
 </div>
 </div>
 </div>
+</section>
+<section>
+<section id="scientific-building-blocks-are-not-static" class="title-slide slide level1 center">
+<h1>Scientific building blocks are not static</h1>
+
+</section>
+<section id="we-need-version-control" class="slide level2">
+<h2>We need version control</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<div class="fragment">
+<p>… for <strong>code</strong> (text files) <img data-src="images/phd-comic-version-control-code-cropped-upper.gif"></p>
+</div>
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/phd-comic-version-control-code-cropped-lower.gif"></p>
+<figcaption><a href="http://phdcomics.com/comics/archive/phd101212s.gif">© Jorge Cham (phdcomics.com)</a></figcaption>
+</figure>
+</div>
+</div>
+</div><div class="column" style="width:58%;">
+<div class="fragment">
+<p>… for <strong>data</strong> (binary files) <img data-src="images/phd-comic-version-control-data.gif" alt="© Jorge Cham (phdcomics.com)"></p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<!-- -->
+<h3 id="if-everything-is-relevant-track-everything.">If everything is relevant, track everything.</h3>
+</div>
+<aside class="notes">
+<ul>
+<li>Analysis code, manuscripts and other files evolve</li>
+<li>Rewrite, fix bugs, add functions, refactor, extend, …</li>
+<li>Version control is relevant for anyone who wants to track the evolution of digital objects</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-are-git-and-datalad" class="slide level2">
+<h2>What are Git and DataLad?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/git-logo-full.svg" style="width:50.0%"></p>
+<figcaption><a href="https://git-scm.com/">git-scm.com</a> (Logo by Jason Long; License: <a href="https://git-scm.com/downloads/logos">CC BY 3.0 Unported</a>)</figcaption>
+</figure>
+</div>
+<ul>
+<li>most popular version control system</li>
+<li>free, <a href="https://github.com/git">open-source</a> command-line tool</li>
+<li>graphical user interfaces exist, e.g., <a href="https://www.gitkraken.com/">GitKraken</a></li>
+<li>standard tool in the software industry</li>
+<li>100 million <a href="https://github.com/">GitHub</a> users <a href="#/footnotes" class="footnote-ref" id="fnref1" role="doc-noteref" data-footnote-href="#/fn1" onclick=""><sup>1</sup></a></li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/datalad-logo-full.svg" style="width:50.0%"></p>
+<figcaption><a href="https://www.datalad.org/">datalad.org</a></figcaption>
+</figure>
+</div>
+<ul>
+<li>“Git for (large) data”</li>
+<li>free, <a href="https://github.com/datalad/datalad">open-source</a> command-line tool</li>
+<li>builds on top of <a href="https://git-scm.com/">Git</a> and <a href="https://git-annex.branchable.com/">git-annex</a></li>
+<li><strong>allows to version control arbitrarily large datasets</strong> <a href="#/footnotes" class="footnote-ref" id="fnref2" role="doc-noteref" data-footnote-href="#/fn2" onclick=""><sup>2</sup></a></li>
+<li>graphical user interface exists: <a href="http://docs.datalad.org/projects/gooey/en/latest/index.html">DataLad Gooey</a></li>
+</ul>
+</div>
+</div>
+</div>
+<aside></aside></section>
+<section id="version-control-with-datalad" class="slide level2">
+<h2>Version Control with DataLad</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/datalad-dataset.svg" style="width:84.0%"></p>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/intro/executive_summary.html">Datalad Handbook</a> (License: <a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
+</figure>
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">datalad</span> create mydataset</span></code></pre></div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/datalad-local_wf.svg" style="width:100.0%"></p>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/intro/executive_summary.html">Datalad Handbook</a> (License: <a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
+</figure>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">datalad</span> save <span class="at">-m</span> <span class="st">"save large dataset"</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>DataLad knows two things: Datasets and files</li>
+<li>Every file you put into a in a dataset can be easily version-controlled, regardless of size</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="data-in-datalad-datasets-are-either-stored-in-git-or-git-annex" class="slide level2">
+<h2>Data in DataLad datasets are either stored in Git or git-annex</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/datalad-publishing-gitvsannex.svg" style="width:100.0%"></p>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/index.html#">Datalad Handbook</a> (License: <a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
+</figure>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h4 id="git">Git</h4>
+<ul>
+<li>handles small files well (text, code)</li>
+<li>file contents are in Git history and will be shared</li>
+<li>Shared with every dataset clone</li>
+<li>Useful: Small, non-binary, frequently modified files</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<h4 id="git-annex">git-annex</h4>
+<ul>
+<li>handles all types and sizes of files well</li>
+<li>file contents are in the annex. Not necessarily shared</li>
+<li>Can be kept private on a per-file level</li>
+<li>Useful: Large files, private files</li>
+</ul>
+</div>
+</div>
+</section></section>
+<section>
+<section id="science-is-build-from-modular-units" class="title-slide slide level1 center">
+<h1>Science is build from modular units</h1>
+
+</section>
+<section id="science-is-build-from-modular-units-1" class="slide level2">
+<h2>Science is build from modular units</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<!-- -->
+<h3 id="research-as-a-sequence">Research as a sequence</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/datalad-submodule-setup.svg" style="width:104.0%"></p>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/intro/executive_summary.html">Datalad Handbook</a> (License: <a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
+</figure>
+</div>
+</div>
+<div class="fragment">
+<ul>
+<li>Everything is in one big project folder</li>
+<li>In which modules should we put each step?</li>
+<li>Prior works (algorithm development, empirical data, etc.) are combined to produce novel results with to goal of a publication</li>
+<li>Aggregation across time and contributors</li>
+<li>Aiming for (but often failing) to be reproducible</li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<!-- -->
+<h3 id="research-as-a-cycle">Research as a cycle</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/turing-way-research-cycle.svg" style="width:80.0%"></p>
+<figcaption><a href="https://www.datalad.org/">Turing Way!</a></figcaption>
+</figure>
+</div>
+</div>
+<div class="fragment">
+<!-- -->
+<h4 id="what-we-need">What we need</h4>
+<ul>
+<li>Git can struggle with 1M+ files or 100k+ commits</li>
+<li>Develop scientific outputs as modular but linked units</li>
+<li>Independently update and develop data sources</li>
+<li>Manage access to public / private datasets</li>
+</ul>
+</div>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>Project-specific which data to put where</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="dataset-nesting" class="slide level2">
+<h2>Dataset nesting</h2>
+<ul>
+<li>seamless nesting of modular datasets in hierarchical super-/sub-dataset relationships</li>
+<li>based in Git submodules, but mono-repo feeling thanks to recursive operations</li>
+<li>overcomes scaling issues with large amounts of files (Example: Human Connectome Project)</li>
+<li>modularizes research components for transparency, reuse and access management</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/datalad-linkage-subds.svg" style="width:104.0%"></p>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/basics/101-106-nesting.html">Datalad Handbook</a> (License: <a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
+</figure>
+</div>
+</section>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/datalad-linkage-subds.svg" style="width:40.0%"></p>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/basics/101-106-nesting.html">Datalad Handbook</a> (License: <a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
+</figure>
+</div>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="fragment">
+<p>First, let’s create a new data analysis dataset:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" data-code-line-numbers="1"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">datalad</span> create <span class="at">-c</span> yoda myanalysis</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="ex">[INFO</span>   ] Creating a new annex repo at /tmp/myanalysis</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="ex">[INFO</span>   ] Scanning for unlocked files <span class="er">(</span><span class="ex">this</span> may take some time<span class="kw">)</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="ex">[INFO</span>   ] Running procedure cfg_yoda</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="ex">[INFO</span>   ] == Command start <span class="er">(</span><span class="ex">output</span> follows<span class="kw">)</span> <span class="ex">=====</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="ex">[INFO</span>   ] == Command exit <span class="er">(</span><span class="ex">modification</span> check follows<span class="kw">)</span> <span class="ex">=====</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="ex">create</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> /tmp/myanalysis <span class="er">(</span><span class="ex">dataset</span><span class="kw">)</span></span></code></pre></div>
+</div>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="fragment">
+<p><code>-c yoda</code> initializes useful structure:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">tree</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="bu">.</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="ex">├──</span> CHANGELOG.md</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="ex">├──</span> README.md</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="ex">└──</span> code</span>
+<span id="cb4-6"><a href="#cb4-6"></a>    <span class="ex">└──</span> README.md</span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="ex">2</span> directories, 3 files</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="fragment">
+<p>We install analysis input data as a subdataset to the dataset:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" data-code-line-numbers="1"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">datalad</span> clone <span class="at">-d</span> . https://github.com/datalad-handbook/iris_data.git input/</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="ex">[INFO</span>   ] Remote origin not usable by git-annex<span class="kw">;</span> <span class="ex">setting</span> annex-ignore</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">install</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> input <span class="er">(</span><span class="ex">dataset</span><span class="kw">)</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="ex">add</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> input <span class="er">(</span><span class="ex">dataset</span><span class="kw">)</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="ex">add</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> .gitmodules <span class="er">(</span><span class="fu">file</span><span class="kw">)</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="ex">save</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> . <span class="er">(</span><span class="ex">dataset</span><span class="kw">)</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="ex">action</span> summary:</span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="ex">add</span> <span class="er">(</span><span class="ex">ok:</span> 2<span class="kw">)</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>  <span class="fu">install</span> <span class="er">(</span><span class="ex">ok:</span> 1<span class="kw">)</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>  <span class="ex">save</span> <span class="er">(</span><span class="ex">ok:</span> 1<span class="kw">)</span></span></code></pre></div>
+</div>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="fragment">
+<p><code>input</code> is a regular folder inside <code>myanalysis</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" data-code-line-numbers="7,8"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">tree</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="bu">.</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="ex">├──</span> CHANGELOG.md</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="ex">├──</span> README.md</span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="ex">├──</span> code</span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="ex">│</span>   └── README.md</span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="ex">└──</span> input</span>
+<span id="cb6-8"><a href="#cb6-8"></a>    <span class="ex">└──</span> iris.csv</span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="ex">3</span> directories, 4 files</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="modular-units-with-clear-provenance" class="slide level2">
+<h2>Modular units with clear provenance</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="8-12,19"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">git</span> diff HEAD~1</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">diff</span> <span class="at">--git</span> a/.gitmodules b/.gitmodules</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="ex">new</span> file mode 100644</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="ex">index</span> 0000000..fc69c84</span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="ex">---</span> /dev/null</span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="ex">+++</span> b/.gitmodules</span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="ex">@@</span> <span class="at">-0,0</span> +1,5 @@</span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="ex">+[submodule</span> <span class="st">"input"</span>]</span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="ex">+</span>       path = input</span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="ex">+</span>       url = https://github.com/datalad-handbook/iris_data.git</span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="ex">+</span>       datalad-id = 5800e71c-09f9-11ea-98f1-e86a64c8054c</span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="ex">+</span>       datalad-url = https://github.com/datalad-handbook/iris_data.git</span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="fu">diff</span> <span class="at">--git</span> a/input b/input</span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="ex">new</span> file mode 160000</span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="ex">index</span> 0000000..b9eb768</span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="ex">---</span> /dev/null</span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="ex">+++</span> b/input</span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="ex">@@</span> <span class="at">-0,0</span> +1 @@</span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="ex">+Subproject</span> commit b9eb768c145e4a253d619d2c8285e540869d2021</span></code></pre></div>
+</div>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/datalad-linkage.svg" style="width:100.0%"></p>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/basics/101-106-nesting.html">Datalad Handbook</a> (License: <a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="fragment">
+<p>We know <strong>exactly</strong>:</p>
+<ol type="1">
+<li>where the subdataset comes from</li>
+<li>which version of the subdataset is installed</li>
+</ol>
+<ul>
+<li>We can update each subdataset independently</li>
+</ul>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/turing-way-provenance.svg" style="width:100.0%"></p>
+<figcaption><a href="https://www.datalad.org/">Turing Way!</a></figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section id="science-is-exploratory-multi-stepped-and-iterative" class="title-slide slide level1 center">
+<h1>Science is exploratory, multi-stepped and iterative</h1>
+
+</section>
+
+<section>
+<section id="science-is-collaborative-distributed" class="title-slide slide level1 center">
+<h1>Science is collaborative &amp; distributed</h1>
+
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<h3 id="scientific-building-blocks-are-not-static-version-control-all-the-things">Scientific building blocks are not static: Version Control all the things</h3>
+<h3 id="science-is-modular-nesting">Science is modular: Nesting</h3>
+<h3 id="towards-science-as-open-source-knowledge-development">Towards science as open-source knowledge development</h3>
 </section>
 <section id="thank-you" class="slide level2">
 <h2>Thank you!</h2>
@@ -413,6 +865,13 @@
 <div class="footer footer-default">
 <p>Reproducible Research Data Management with DataLad</p>
 </div>
+</section></section>
+<section id="footnotes" class="footnotes footnotes-end-of-document smaller scrollable" role="doc-endnotes"><h2>Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>(Source: <a href="https://en.wikipedia.org/wiki/GitHub">Wikipedia</a>)</p></li>
+<li id="fn2"><p>see DataLad dataset of 80TB / 15 million files from the Human Connectome Project (see <a href="https://handbook.datalad.org/en/latest/usecases/HCP_dataset.html#usecase-hcp-dataset">details</a>)</p></li>
+</ol>
 </section>
     </div>
   </div>
@@ -609,6 +1068,44 @@
       });
     </script>
     <script defer="" data-domain="lennartwittkuhn.com/talk-mps-fdm-2024" src="https://plausible.io/js/script.js"></script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
@@ -632,58 +1129,6 @@
       const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
       tabsets.forEach(function(tabset) {
         const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
-          }
-        }
-        return false;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
-          }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
       });
       function tippyHover(el, contentFn) {
         const config = {
