@@ -819,15 +819,210 @@
 </div>
 </div>
 </section></section>
+<section>
 <section id="science-is-exploratory-multi-stepped-and-iterative" class="title-slide slide level1 center">
 <h1>Science is exploratory, multi-stepped and iterative</h1>
 
 </section>
-
+<section id="reusing-past-work-is-hard" class="slide level2">
+<h2>Reusing past work is hard</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/phd-comic-scratch.gif" style="width:70.0%"></p>
+<figcaption><a href="https://www.datalad.org/">Turing Way!</a></figcaption>
+</figure>
+</div>
+<blockquote>
+<p>Your number 1 collaborator if yourself from 6 months ago and they don’t answer emails.</p>
+</blockquote>
+<blockquote>
+<p>“Shit, which version of which script produced these outputs from which version of what data?”</p>
+</blockquote>
+<blockquote>
+<p>“Shit, why buttons did I click and in which order did I use all those tools?”</p>
+</blockquote>
+</section>
+<section id="datalad-run" class="slide level2">
+<h2>datalad-run</h2>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>datalad run</strong> wraps around anything expressed in a command line call and saves the dataset modifications resulting from the execution.</p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/datalad-run-basic.svg" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>datalad rerun</strong> repeats captured executions. If the outcomes differ, it saves a new state of them.</p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/datalad-rerun.svg" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>datalad containers-run</strong> executes command line calls inside a tracked software container and saves the dataset modifications resulting from the execution.</p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/datalad-containers-run-basic.svg" style="width:80.0%"></p>
+<figcaption><a href="https://handbook.datalad.org/en/latest/basics/basics-run.html">DataLad Handbook</a></figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-let-me-just-quickly-copy-those-files" class="slide level2">
+<h2>Example: “Let me just quickly copy those files …”</h2>
+<h3 id="without-datalad-run">Without datalad run</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<p>Researcher writes some Python code to copy files:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="cf">for</span> sourcefile, dest <span class="kw">in</span> <span class="bu">zip</span>(glob(path_source), glob(path_dest)):</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  destination <span class="op">=</span> path.join(dest, Path(sourcefile).name)</span>
+<span id="cb8-3"><a href="#cb8-3"></a>  shutil.move(sourcefile, destination)</span></code></pre></div>
+<div class="fragment">
+<p><code>glob</code> does not sort! <span class="emoji" data-emoji="scream">😱</span></p>
+</div>
+</div>
+</div><div class="column" style="width:25%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="1,3,5,7,9"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">source/</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="ex">├──</span> sub-01</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="ex">│</span>   └── sub-01-events.tsv</span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="ex">├──</span> sub-02</span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="ex">│</span>   └── sub-02-events.tsv</span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="ex">├──</span> sub-03</span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="ex">│</span>   └── sub-03-events.tsv</span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="ex">├──</span> sub-04</span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="ex">│</span>   └── sub-04-events.tsv</span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="ex">[...]</span></span></code></pre></div>
+</div>
+</div>
+</div><div class="column" style="width:25%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="1,3,5,7,9"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">destination/</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="ex">├──</span> sub-01</span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="ex">│</span>   └── sub-03-events.tsv</span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="ex">├──</span> sub-02</span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="ex">│</span>   └── sub-01-events.tsv</span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="ex">├──</span> sub-03</span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="ex">│</span>   └── sub-04-events.tsv</span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="ex">├──</span> sub-04</span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="ex">│</span>   └── sub-02-events.tsv</span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="ex">[...]</span></span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<p>Researcher shares <code>analysis</code> with collaborators.</p>
+<h3 id="with-datalad-run">With datalad run</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<p>Researcher uses <code>datalad-run</code> to copy files:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="ex">$</span> datalad run <span class="at">-m</span> <span class="st">"Copy event files"</span> <span class="dt">\</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="st">"for sub in eventfiles;</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="st">    do mv </span><span class="va">${sub}</span><span class="st">/events.tsv analysis/</span><span class="va">${sub}</span><span class="st">/events.tsv;</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="st">done"</span></span></code></pre></div>
+</div>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="fragment">
+<p>bla</p>
+</div>
+</div>
+</div>
+</section></section>
 <section>
 <section id="science-is-collaborative-distributed" class="title-slide slide level1 center">
 <h1>Science is collaborative &amp; distributed</h1>
 
+</section>
+<section id="interoperability" class="slide level2">
+<h2>Interoperability</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/datalad-startingpoint.svg" style="width:100.0%"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Scientific workflows can be idiosyncratic across institutions / departments / labs / any two scientists</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/datalad-services-only.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/datalad-publishing-network.svg" style="width:100.0%"></p>
+</figure>
+</div>
+</section>
+<section id="share-data-like-code" class="slide level2">
+<h2>Share data like code</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/datalad-collaboration.svg" style="width:100.0%"></p>
+</figure>
+</div>
+</section>
+<section id="interoperability-1" class="slide level2">
+<h2>Interoperability</h2>
+<p>DataLad is built to maximize interoperability and streamline routines across hosting and storage technology</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/datalad-services-connected.png" style="width:50.0%"></p>
+</figure>
+</div>
+</section>
+<section id="special-cases" class="slide level2">
+<h2>Special cases</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h4 id="with-annex-support">With annex support</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/datalad-publishing-network-publish-gin.svg" style="width:100.0%"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<h4 id="special-remotes-with-repositories">Special remotes with repositories</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/datalad-publishing-network-publish-osf.svg" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="have-access-to-more-data-than-you-have-disk-space" class="slide level2">
+<h2>Have access to more data than you have disk-space</h2>
+<p>Cloned datasets are lean. “Meta data” (file names, availability) are present, but no file content:</p>
+<p>files’ contents can be retrieved on demand:</p>
+<p>Drop file content that is not needed:</p>
+<p>When files are dropped, only “meta data” stays behind, and they can be re-obtained on demand.</p>
 </section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
