@@ -1080,6 +1080,71 @@ We can now view the [files on ownCloud](https://owncloud.gwdg.de/index.php/apps/
 
 ![](../static/images/owncloud_datalad_push.png)
 
+## Data sharing with S3 Object Storage (min.io)
+
+::::: {.columns}
+:::: {.column width="50%"}
+
+::::: {.columns}
+:::: {.column width="30%"}
+![[gin.g-node.org](https://gin.g-node.org/)](images/gin-logo.png){fig-align="left" width="100%"}
+::::
+:::: {.column width="70%"}
+"*GIN is [...] a web-accessible repository store of your data **based on git and git-annex** that you can access securely anywhere you desire while keeping your data in sync, backed up and easily accessible [...]"*
+::::
+:::::
+
+#### :sparkles: Advantages of GIN :sparkles:
+
+- free to use and open-source (could be hosted within your institution; for more details, see [here](https://gin.g-node.org/G-Node/Info/wiki/In+House))
+- currently unlimited storage capacity and no restrictions on individual file size
+- supports private and public repositories
+- publicly funded by the Federal Ministry of Education and Research (BMBF; details [here](https://gin.g-node.org/G-Node/Info/wiki/about#support))
+- servers are on German land (Munich, Germany; cf. GDPR)
+- provides Digital Object Identifiers (DOIs) (details [here](https://gin.g-node.org/G-Node/Info/wiki/DOI)) and allows free licensing (details [here](https://gin.g-node.org/G-Node/Info/wiki/Licensing))
+
+::::
+:::: {.column width="50%"}
+
+1. Create a GIN sibling:
+
+
+```{bash}
+git annex initremote s3 type=S3 encryption=none autoenable=true host=minio.g.mpib-berlin.mpg.de port=443 protocol=https bucket=neurocode-neuro-data datacenter=EU
+```
+
+
+```{bash}
+BUCKET=neuro-data
+git annex initremote public-s3 type=S3 encryption=none \
+bucket=$BUCKET public=yes datacenter=mpib \
+host=mpibberlin.com protocol=https port=443 autoenable=true
+```
+
+
+```{bash}
+git annex initremote s3 type=S3 encryption=none \
+bucket=neuro-data datacenter=EU \
+host=mpibberlin.com protocol=https port=443 autoenable=true
+```
+
+2. Push dataset to GIN
+
+```{bash}
+datalad push --to gin
+```
+
+![Access the dataset [on GIN](https://gin.g-node.org/lnnrtwttkhn/neuro-data)](images/gin-screenshot.png){fig-align="center" width="100%"}
+
+3. Clone dataset from GIN
+
+```{bash}
+datalad clone https://gin.g-node.org/lnnrtwttkhn/neuro-data.git
+```
+
+::::
+:::::
+
 ## Data sharing via GIN
 
 ::::: {.columns}
