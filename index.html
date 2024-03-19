@@ -481,8 +481,8 @@
 <h1>Scientific building blocks are not static</h1>
 
 </section>
-<section id="we-need-version-control" class="slide level2">
-<h2>We need version control</h2>
+<section id="why-we-need-version-control" class="slide level2">
+<h2>Why we need version control</h2>
 <div class="columns">
 <div class="column" style="width:42%;">
 <div class="fragment">
@@ -524,6 +524,43 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="what-is-version-control" class="slide level2">
+<h2>What is version control?</h2>
+<div class="fragment">
+<p><em>“Version control is a systematic approach to record changes made in a […] set of files, over time. This allows you and your collaborators to track the history, see what changed, and recall specific versions later […]”</em> (<a href="https://the-turing-way.netlify.app/reproducible-research/vcs.html">Turing Way</a>)</p>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<p><i class="fa-solid fa-laptop-code" aria-label="laptop-code"></i> keep track of changes in a directory (a “repository”)</p>
+<p><i class="fa-solid fa-code-commit" aria-label="code-commit"></i> take snapshots (“commits”) of your repo at any time</p>
+<p><i class="fa-solid fa-timeline" aria-label="timeline"></i> know the history: what was changed when by whom</p>
+<p><i class="fa-solid fa-code-compare" aria-label="code-compare"></i> compare commits and go back to any previous state</p>
+<p><i class="fa-solid fa-code-pull-request" aria-label="code-pull-request"></i> work on parallel “branches” &amp; flexibly “merge” them</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/turing-way-version-control.svg" style="width:80.0%"></p>
+<figcaption><a href="https://zenodo.org/record/3695300/files/VersionControl.jpg?download=1">by Scriberia for The Turing Way community (CC BY 4.0)</a></figcaption>
+</figure>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><i class="fa-solid fa-upload" aria-label="upload"></i> “push” your repo to a “remote” location &amp; share it</p>
+<p><i class="fa-brands fa-github" aria-label="github"></i> <i class="fa-brands fa-gitlab" aria-label="gitlab"></i> share repos on platforms like GitHub or GitLab</p>
+<p><i class="fa-solid fa-people-group" aria-label="people-group"></i> work together on the same files at the same time</p>
+<p><i class="fa-solid fa-pen-to-square" aria-label="pen-to-square"></i> others can read, copy, edit and suggest changes</p>
+<p><i class="fa-solid fa-box-open" aria-label="box-open"></i> make your repo public and openly share your work</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/turing-way-pull-request.svg" style="width:84.0%"></p>
+<figcaption><a href="https://zenodo.org/record/3695300/files/FirstPullRequest.jpg?download=1">by Scriberia for The Turing Way community (CC BY 4.0)</a></figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="what-are-git-and-datalad" class="slide level2">
 <h2>What are Git and DataLad?</h2>
@@ -581,6 +618,19 @@
 <p>Single subject epoch (block) auditory fMRI activation data</p>
 <div class="columns">
 <div class="column" style="width:50%;">
+<div class="fragment fade-in-then-semi-out">
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 55.6%;justify-content: center;">
+<p><img data-src="images/mri.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 44.4%;justify-content: center;">
+<p><img data-src="images/brain-anatomical.png"></p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment fade-in-then-semi-out">
 <div class="cell" data-file="code/create_dataset.sh">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">mkdir</span> neuro-data</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">wget</span> https://www.fil.ion.ucl.ac.uk/spm/download/data/MoAEpilot/MoAEpilot.bids.zip <span class="dt">\</span></span>
@@ -591,13 +641,23 @@
 <span id="cb1-7"><a href="#cb1-7"></a><span class="fu">mv</span> MoAEpilot/<span class="pp">*</span> .</span>
 <span id="cb1-8"><a href="#cb1-8"></a><span class="fu">rm</span> <span class="at">-R</span> MoAEpilot</span></code></pre></div>
 </div>
+</div>
+<div class="fragment fade-in-then-semi-out">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/bids-logo.svg" style="width:70.0%"></p>
 <figcaption><a href="https://bids.neuroimaging.io/">Brain Imaging Data Structure (BIDS)</a> <span class="citation" data-cites="gorgolewski2016">Gorgolewski et al. (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span> (License: <a href="https://github.com/bids-standard/bids-specification?tab=CC-BY-4.0-1-ov-file#readme">CC BY 4.0</a>)</figcaption>
 </figure>
 </div>
+</div>
 </div><div class="column" style="width:50%;">
+<div class="fragment fade-in-then-semi-out">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/bids-overview.png" style="width:100.0%"></p>
+<figcaption><a href="https://bids.neuroimaging.io/">Brain Imaging Data Structure (BIDS)</a> <span class="citation" data-cites="gorgolewski2016">Gorgolewski et al. (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span> (License: <a href="https://www.nature.com/articles/sdata201644#rightslink">CC BY 4.0</a>)</figcaption>
+</figure>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">tree</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="bu">.</span></span>
@@ -614,11 +674,6 @@
 <span id="cb2-13"><a href="#cb2-13"></a></span>
 <span id="cb2-14"><a href="#cb2-14"></a><span class="ex">4</span> directories, 7 files</span></code></pre></div>
 </div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/bids-overview.png" style="width:100.0%"></p>
-<figcaption><a href="https://bids.neuroimaging.io/">Brain Imaging Data Structure (BIDS)</a> <span class="citation" data-cites="gorgolewski2016">Gorgolewski et al. (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span> (License: <a href="https://www.nature.com/articles/sdata201644#rightslink">CC BY 4.0</a>)</figcaption>
-</figure>
 </div>
 </div>
 </div>
@@ -1805,7 +1860,7 @@ View output
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-14" data-code-lines="5" data-code-annotation="1">Replace <code>&lt;dataset-name&gt;</code> with the name of your dataset, i.e., the name of your dataset folder. In this example, we replace <code>&lt;dataset-name&gt;</code> with <code>neuro-data</code>. The complete command for your example hence looks like this:</span>
+<span data-code-lines="5" data-code-cell="annotated-cell-14" data-code-annotation="1">Replace <code>&lt;dataset-name&gt;</code> with the name of your dataset, i.e., the name of your dataset folder. In this example, we replace <code>&lt;dataset-name&gt;</code> with <code>neuro-data</code>. The complete command for your example hence looks like this:</span>
 </dd>
 </dl>
 </div>
@@ -1826,15 +1881,15 @@ View output
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-16" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-16" data-code-lines="1" data-code-annotation="1">Enter the email address of your ownCloud account.</span>
+<span data-code-lines="1" data-code-cell="annotated-cell-16" data-code-annotation="1">Enter the email address of your ownCloud account.</span>
 </dd>
 <dt data-target-cell="annotated-cell-16" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-16" data-code-lines="2" data-code-annotation="2">Enter the password of your ownCloud account.</span>
+<span data-code-lines="2" data-code-cell="annotated-cell-16" data-code-annotation="2">Enter the password of your ownCloud account.</span>
 </dd>
 <dt data-target-cell="annotated-cell-16" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-16" data-code-lines="3" data-code-annotation="3">Repeat the password of your ownCloud account.</span>
+<span data-code-lines="3" data-code-cell="annotated-cell-16" data-code-annotation="3">Repeat the password of your ownCloud account.</span>
 </dd>
 </dl>
 </div>
@@ -1851,7 +1906,7 @@ View output
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-18" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-18" data-code-lines="1" data-code-annotation="1">Use <code>datalad push</code> to push the dataset contents to ownCloud. For details on <code>datalad push</code>, see the <a href="http://docs.datalad.org/en/stable/generated/man/datalad-push.html">command line reference</a> and <a href="https://handbook.datalad.org/en/latest/basics/101-141-push.html">this chapter</a> in the DataLad Handbook.</span>
+<span data-code-lines="1" data-code-cell="annotated-cell-18" data-code-annotation="1">Use <code>datalad push</code> to push the dataset contents to ownCloud. For details on <code>datalad push</code>, see the <a href="http://docs.datalad.org/en/stable/generated/man/datalad-push.html">command line reference</a> and <a href="https://handbook.datalad.org/en/latest/basics/101-141-push.html">this chapter</a> in the DataLad Handbook.</span>
 </dd>
 </dl>
 </div>
