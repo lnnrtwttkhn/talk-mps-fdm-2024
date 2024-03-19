@@ -11,7 +11,7 @@
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.450">
 
-  <meta name="dcterms.date" content="2024-03-15">
+  <meta name="dcterms.date" content="2024-03-19">
   <title>Reproducible Research Data Management with DataLad</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -95,7 +95,26 @@
     code span.va { color: #e36209; } /* Variable */
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -416,7 +435,7 @@
     </div>
 </div>
 
-  <p class="date">March 15, 2024</p>
+  <p class="date">March 19, 2024</p>
 </section>
 <section id="about" class="slide level2">
 <h2>About</h2>
@@ -533,6 +552,53 @@
 </div>
 </div>
 <aside></aside></section>
+<section id="example-dataset-brain-imaging-data" class="slide level2">
+<h2>Example Dataset: Brain Imaging Data</h2>
+<p>Single subject epoch (block) auditory fMRI activation data</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-file="code/create_dataset.sh">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">mkdir</span> neuro-data</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">wget</span> https://www.fil.ion.ucl.ac.uk/spm/download/data/MoAEpilot/MoAEpilot.bids.zip <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>-O neuro-data.zip</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">unzip</span> neuro-data.zip <span class="at">-d</span> neuro-data</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">rm</span> neuro-data.zip</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="bu">cd</span> neuro-data</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">mv</span> MoAEpilot/<span class="pp">*</span> .</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">rm</span> <span class="at">-R</span> MoAEpilot</span></code></pre></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/bids-logo.svg" style="width:70.0%"></p>
+<figcaption><a href="https://bids.neuroimaging.io/">Brain Imaging Data Structure (BIDS)</a> <span class="citation" data-cites="gorgolewski2016">Gorgolewski et al. (<a href="#/thank-you" role="doc-biblioref" onclick="">2016</a>)</span> (License: <a href="https://github.com/bids-standard/bids-specification?tab=CC-BY-4.0-1-ov-file#readme">CC BY 4.0</a>)</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">tree</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="bu">.</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="ex">├──</span> CHANGES</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="ex">├──</span> README</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="ex">├──</span> dataset_description.json</span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="ex">├──</span> sub-01</span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="ex">│&nbsp;&nbsp;</span> ├── anat</span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; └── sub-01_T1w.nii</span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="ex">│&nbsp;&nbsp;</span> └── func</span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="ex">│&nbsp;&nbsp;</span>     ├── sub-01_task-auditory_bold.nii</span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="ex">│&nbsp;&nbsp;</span>     └── sub-01_task-auditory_events.tsv</span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="ex">└──</span> task-auditory_bold.json</span>
+<span id="cb2-13"><a href="#cb2-13"></a></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="ex">4</span> directories, 7 files</span></code></pre></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/bids-overview.png" style="width:100.0%"></p>
+<figcaption><a href="https://bids.neuroimaging.io/">Brain Imaging Data Structure (BIDS)</a> <span class="citation" data-cites="gorgolewski2016">Gorgolewski et al. (<a href="#/thank-you" role="doc-biblioref" onclick="">2016</a>)</span> (License: <a href="https://www.nature.com/articles/sdata201644#rightslink">CC BY 4.0</a>)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
 <section id="version-control-with-datalad" class="slide level2">
 <h2>Version Control with DataLad</h2>
 <div class="columns">
@@ -544,7 +610,23 @@
 <figcaption>from the <a href="https://handbook.datalad.org/en/latest/intro/executive_summary.html">Datalad Handbook</a> (License: <a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">datalad</span> create mydataset</span></code></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">datalad</span> create neuro-data</span></code></pre></div>
+</div>
+<br>
+<details>
+<summary>
+View output
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource bash code-overflow-wrap number-lines"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">create</span><span class="er">(</span><span class="ex">error</span><span class="kw">)</span><span class="bu">:</span> /tmp/neuro-data <span class="er">(</span><span class="ex">dataset</span><span class="kw">)</span> <span class="ex">[will</span> not create a dataset in a non-empty directory, use <span class="kw">`</span><span class="ex">--force</span><span class="kw">`</span> option to ignore]</span></code></pre></div>
+</div>
+<p>Rerun the command using <code>--force</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">datalad</span> create <span class="at">--force</span> neuro-data</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="ex">create</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> /tmp/neuro-data <span class="er">(</span><span class="ex">dataset</span><span class="kw">)</span></span></code></pre></div>
+</div>
+</details>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
@@ -554,7 +636,27 @@
 <figcaption>from the <a href="https://handbook.datalad.org/en/latest/intro/executive_summary.html">Datalad Handbook</a> (License: <a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">datalad</span> save <span class="at">-m</span> <span class="st">"save large dataset"</span></span></code></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">datalad</span> save <span class="at">-m</span> <span class="st">"save neuro data"</span></span></code></pre></div>
+</div>
+<br>
+<details>
+<summary>
+View output
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">add</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> CHANGES <span class="er">(</span><span class="fu">file</span><span class="kw">)</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="ex">add</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> README <span class="er">(</span><span class="fu">file</span><span class="kw">)</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="ex">add</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> dataset_description.json <span class="er">(</span><span class="fu">file</span><span class="kw">)</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="ex">add</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> sub-01/anat/sub-01_T1w.nii <span class="er">(</span><span class="fu">file</span><span class="kw">)</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="ex">add</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> sub-01/func/sub-01_task-auditory_bold.nii <span class="er">(</span><span class="fu">file</span><span class="kw">)</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="ex">add</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> sub-01/func/sub-01_task-auditory_events.tsv <span class="er">(</span><span class="fu">file</span><span class="kw">)</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="ex">add</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> task-auditory_bold.json <span class="er">(</span><span class="fu">file</span><span class="kw">)</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="ex">save</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> . <span class="er">(</span><span class="ex">dataset</span><span class="kw">)</span>                                              <span class="ex">action</span> summary:</span>
+<span id="cb7-9"><a href="#cb7-9"></a>  <span class="ex">add</span> <span class="er">(</span><span class="ex">ok:</span> 7<span class="kw">)</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>  <span class="ex">save</span> <span class="er">(</span><span class="ex">ok:</span> 1<span class="kw">)</span></span></code></pre></div>
+</div>
+</details>
 </div>
 </div>
 </div>
@@ -698,26 +800,26 @@
 <div class="fragment">
 <p>First, let’s create a new data analysis dataset:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3" data-code-line-numbers="1"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">datalad</span> create <span class="at">-c</span> yoda myanalysis</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="ex">[INFO</span>   ] Creating a new annex repo at /tmp/myanalysis</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="ex">[INFO</span>   ] Scanning for unlocked files <span class="er">(</span><span class="ex">this</span> may take some time<span class="kw">)</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="ex">[INFO</span>   ] Running procedure cfg_yoda</span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="ex">[INFO</span>   ] == Command start <span class="er">(</span><span class="ex">output</span> follows<span class="kw">)</span> <span class="ex">=====</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="ex">[INFO</span>   ] == Command exit <span class="er">(</span><span class="ex">modification</span> check follows<span class="kw">)</span> <span class="ex">=====</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="ex">create</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> /tmp/myanalysis <span class="er">(</span><span class="ex">dataset</span><span class="kw">)</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="1"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="ex">datalad</span> create <span class="at">-c</span> yoda myanalysis</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="ex">[INFO</span>   ] Creating a new annex repo at /tmp/myanalysis</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="ex">[INFO</span>   ] Scanning for unlocked files <span class="er">(</span><span class="ex">this</span> may take some time<span class="kw">)</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="ex">[INFO</span>   ] Running procedure cfg_yoda</span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="ex">[INFO</span>   ] == Command start <span class="er">(</span><span class="ex">output</span> follows<span class="kw">)</span> <span class="ex">=====</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="ex">[INFO</span>   ] == Command exit <span class="er">(</span><span class="ex">modification</span> check follows<span class="kw">)</span> <span class="ex">=====</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="ex">create</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> /tmp/myanalysis <span class="er">(</span><span class="ex">dataset</span><span class="kw">)</span></span></code></pre></div>
 </div>
 </div>
 </div><div class="column" style="width:45%;">
 <div class="fragment">
 <p><code>-c yoda</code> initializes useful structure:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">tree</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="bu">.</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="ex">├──</span> CHANGELOG.md</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="ex">├──</span> README.md</span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="ex">└──</span> code</span>
-<span id="cb4-6"><a href="#cb4-6"></a>    <span class="ex">└──</span> README.md</span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="ex">2</span> directories, 3 files</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">tree</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="bu">.</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="ex">├──</span> CHANGELOG.md</span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="ex">├──</span> README.md</span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="ex">└──</span> code</span>
+<span id="cb9-6"><a href="#cb9-6"></a>    <span class="ex">└──</span> README.md</span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="ex">2</span> directories, 3 files</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -727,31 +829,31 @@
 <div class="fragment">
 <p>We install analysis input data as a subdataset to the dataset:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5" data-code-line-numbers="1"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">datalad</span> clone <span class="at">-d</span> . https://github.com/datalad-handbook/iris_data.git input/</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="ex">[INFO</span>   ] Remote origin not usable by git-annex<span class="kw">;</span> <span class="ex">setting</span> annex-ignore</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">install</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> input <span class="er">(</span><span class="ex">dataset</span><span class="kw">)</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="ex">add</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> input <span class="er">(</span><span class="ex">dataset</span><span class="kw">)</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="ex">add</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> .gitmodules <span class="er">(</span><span class="fu">file</span><span class="kw">)</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="ex">save</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> . <span class="er">(</span><span class="ex">dataset</span><span class="kw">)</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="ex">action</span> summary:</span>
-<span id="cb5-8"><a href="#cb5-8"></a>  <span class="ex">add</span> <span class="er">(</span><span class="ex">ok:</span> 2<span class="kw">)</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a>  <span class="fu">install</span> <span class="er">(</span><span class="ex">ok:</span> 1<span class="kw">)</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a>  <span class="ex">save</span> <span class="er">(</span><span class="ex">ok:</span> 1<span class="kw">)</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="1"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">datalad</span> clone <span class="at">-d</span> . https://github.com/datalad-handbook/iris_data.git input/</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="ex">[INFO</span>   ] Remote origin not usable by git-annex<span class="kw">;</span> <span class="ex">setting</span> annex-ignore</span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="fu">install</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> input <span class="er">(</span><span class="ex">dataset</span><span class="kw">)</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="ex">add</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> input <span class="er">(</span><span class="ex">dataset</span><span class="kw">)</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="ex">add</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> .gitmodules <span class="er">(</span><span class="fu">file</span><span class="kw">)</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="ex">save</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> . <span class="er">(</span><span class="ex">dataset</span><span class="kw">)</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="ex">action</span> summary:</span>
+<span id="cb10-8"><a href="#cb10-8"></a>  <span class="ex">add</span> <span class="er">(</span><span class="ex">ok:</span> 2<span class="kw">)</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>  <span class="fu">install</span> <span class="er">(</span><span class="ex">ok:</span> 1<span class="kw">)</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>  <span class="ex">save</span> <span class="er">(</span><span class="ex">ok:</span> 1<span class="kw">)</span></span></code></pre></div>
 </div>
 </div>
 </div><div class="column" style="width:45%;">
 <div class="fragment">
 <p><code>input</code> is a regular folder inside <code>myanalysis</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6" data-code-line-numbers="7,8"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">tree</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="bu">.</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="ex">├──</span> CHANGELOG.md</span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="ex">├──</span> README.md</span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="ex">├──</span> code</span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="ex">│</span>   └── README.md</span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="ex">└──</span> input</span>
-<span id="cb6-8"><a href="#cb6-8"></a>    <span class="ex">└──</span> iris.csv</span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="ex">3</span> directories, 4 files</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb11" data-code-line-numbers="7,8"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="ex">tree</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="bu">.</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="ex">├──</span> CHANGELOG.md</span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="ex">├──</span> README.md</span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="ex">├──</span> code</span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="ex">│</span>   └── README.md</span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="ex">└──</span> input</span>
+<span id="cb11-8"><a href="#cb11-8"></a>    <span class="ex">└──</span> iris.csv</span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="ex">3</span> directories, 4 files</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -763,25 +865,25 @@
 <div class="column" style="width:55%;">
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="8-12,19"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">git</span> diff HEAD~1</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">diff</span> <span class="at">--git</span> a/.gitmodules b/.gitmodules</span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="ex">new</span> file mode 100644</span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="ex">index</span> 0000000..fc69c84</span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="ex">---</span> /dev/null</span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="ex">+++</span> b/.gitmodules</span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="ex">@@</span> <span class="at">-0,0</span> +1,5 @@</span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="ex">+[submodule</span> <span class="st">"input"</span>]</span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="ex">+</span>       path = input</span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="ex">+</span>       url = https://github.com/datalad-handbook/iris_data.git</span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="ex">+</span>       datalad-id = 5800e71c-09f9-11ea-98f1-e86a64c8054c</span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="ex">+</span>       datalad-url = https://github.com/datalad-handbook/iris_data.git</span>
-<span id="cb7-13"><a href="#cb7-13"></a><span class="fu">diff</span> <span class="at">--git</span> a/input b/input</span>
-<span id="cb7-14"><a href="#cb7-14"></a><span class="ex">new</span> file mode 160000</span>
-<span id="cb7-15"><a href="#cb7-15"></a><span class="ex">index</span> 0000000..b9eb768</span>
-<span id="cb7-16"><a href="#cb7-16"></a><span class="ex">---</span> /dev/null</span>
-<span id="cb7-17"><a href="#cb7-17"></a><span class="ex">+++</span> b/input</span>
-<span id="cb7-18"><a href="#cb7-18"></a><span class="ex">@@</span> <span class="at">-0,0</span> +1 @@</span>
-<span id="cb7-19"><a href="#cb7-19"></a><span class="ex">+Subproject</span> commit b9eb768c145e4a253d619d2c8285e540869d2021</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb12" data-code-line-numbers="8-12,19"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">git</span> diff HEAD~1</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">diff</span> <span class="at">--git</span> a/.gitmodules b/.gitmodules</span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="ex">new</span> file mode 100644</span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="ex">index</span> 0000000..fc69c84</span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="ex">---</span> /dev/null</span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="ex">+++</span> b/.gitmodules</span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="ex">@@</span> <span class="at">-0,0</span> +1,5 @@</span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="ex">+[submodule</span> <span class="st">"input"</span>]</span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="ex">+</span>       path = input</span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="ex">+</span>       url = https://github.com/datalad-handbook/iris_data.git</span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="ex">+</span>       datalad-id = 5800e71c-09f9-11ea-98f1-e86a64c8054c</span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="ex">+</span>       datalad-url = https://github.com/datalad-handbook/iris_data.git</span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="fu">diff</span> <span class="at">--git</span> a/input b/input</span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="ex">new</span> file mode 160000</span>
+<span id="cb12-15"><a href="#cb12-15"></a><span class="ex">index</span> 0000000..b9eb768</span>
+<span id="cb12-16"><a href="#cb12-16"></a><span class="ex">---</span> /dev/null</span>
+<span id="cb12-17"><a href="#cb12-17"></a><span class="ex">+++</span> b/input</span>
+<span id="cb12-18"><a href="#cb12-18"></a><span class="ex">@@</span> <span class="at">-0,0</span> +1 @@</span>
+<span id="cb12-19"><a href="#cb12-19"></a><span class="ex">+Subproject</span> commit b9eb768c145e4a253d619d2c8285e540869d2021</span></code></pre></div>
 </div>
 </div>
 </div><div class="column" style="width:45%;">
@@ -892,9 +994,9 @@
 <div class="column" style="width:50%;">
 <div class="fragment">
 <p>Researcher writes some Python code to copy files:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="cf">for</span> sourcefile, dest <span class="kw">in</span> <span class="bu">zip</span>(glob(path_source), glob(path_dest)):</span>
-<span id="cb8-2"><a href="#cb8-2"></a>  destination <span class="op">=</span> path.join(dest, Path(sourcefile).name)</span>
-<span id="cb8-3"><a href="#cb8-3"></a>  shutil.move(sourcefile, destination)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a><span class="cf">for</span> sourcefile, dest <span class="kw">in</span> <span class="bu">zip</span>(glob(path_source), glob(path_dest)):</span>
+<span id="cb13-2"><a href="#cb13-2"></a>  destination <span class="op">=</span> path.join(dest, Path(sourcefile).name)</span>
+<span id="cb13-3"><a href="#cb13-3"></a>  shutil.move(sourcefile, destination)</span></code></pre></div>
 <div class="fragment">
 <p><code>glob</code> does not sort! <span class="emoji" data-emoji="scream">😱</span></p>
 </div>
@@ -902,31 +1004,31 @@
 </div><div class="column" style="width:25%;">
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="1,3,5,7,9"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">source/</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="ex">├──</span> sub-01</span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="ex">│</span>   └── sub-01-events.tsv</span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="ex">├──</span> sub-02</span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="ex">│</span>   └── sub-02-events.tsv</span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="ex">├──</span> sub-03</span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="ex">│</span>   └── sub-03-events.tsv</span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="ex">├──</span> sub-04</span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="ex">│</span>   └── sub-04-events.tsv</span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="ex">[...]</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb14" data-code-line-numbers="1,3,5,7,9"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="ex">source/</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="ex">├──</span> sub-01</span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="ex">│</span>   └── sub-01-events.tsv</span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="ex">├──</span> sub-02</span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="ex">│</span>   └── sub-02-events.tsv</span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="ex">├──</span> sub-03</span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="ex">│</span>   └── sub-03-events.tsv</span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="ex">├──</span> sub-04</span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="ex">│</span>   └── sub-04-events.tsv</span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="ex">[...]</span></span></code></pre></div>
 </div>
 </div>
 </div><div class="column" style="width:25%;">
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="1,3,5,7,9"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">destination/</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="ex">├──</span> sub-01</span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="ex">│</span>   └── sub-03-events.tsv</span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="ex">├──</span> sub-02</span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="ex">│</span>   └── sub-01-events.tsv</span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="ex">├──</span> sub-03</span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="ex">│</span>   └── sub-04-events.tsv</span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="ex">├──</span> sub-04</span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="ex">│</span>   └── sub-02-events.tsv</span>
-<span id="cb10-10"><a href="#cb10-10"></a><span class="ex">[...]</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb15" data-code-line-numbers="1,3,5,7,9"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="ex">destination/</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="ex">├──</span> sub-01</span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="ex">│</span>   └── sub-03-events.tsv</span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="ex">├──</span> sub-02</span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="ex">│</span>   └── sub-01-events.tsv</span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="ex">├──</span> sub-03</span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="ex">│</span>   └── sub-04-events.tsv</span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="ex">├──</span> sub-04</span>
+<span id="cb15-9"><a href="#cb15-9"></a><span class="ex">│</span>   └── sub-02-events.tsv</span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="ex">[...]</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -938,10 +1040,10 @@
 <div class="fragment">
 <p>Researcher uses <code>datalad-run</code> to copy files:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="ex">$</span> datalad run <span class="at">-m</span> <span class="st">"Copy event files"</span> <span class="dt">\</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="st">"for sub in eventfiles;</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="st">    do mv </span><span class="va">${sub}</span><span class="st">/events.tsv analysis/</span><span class="va">${sub}</span><span class="st">/events.tsv;</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="st">done"</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="ex">$</span> datalad run <span class="at">-m</span> <span class="st">"Copy event files"</span> <span class="dt">\</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="st">"for sub in eventfiles;</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="st">    do mv </span><span class="va">${sub}</span><span class="st">/events.tsv analysis/</span><span class="va">${sub}</span><span class="st">/events.tsv;</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="st">done"</span></span></code></pre></div>
 </div>
 </div>
 </div><div class="column" style="width:45%;">
@@ -1023,6 +1125,583 @@
 <p>files’ contents can be retrieved on demand:</p>
 <p>Drop file content that is not needed:</p>
 <p>When files are dropped, only “meta data” stays behind, and they can be re-obtained on demand.</p>
+</section></section>
+<section>
+<section id="data-sharing-using-datalad-and-data-infrastructure-of-the-max-planck-society" class="title-slide slide level1 center">
+<h1>Data sharing using DataLad and data infrastructure of the Max Planck Society</h1>
+
+</section>
+<section id="data-sharing-via-keeper" class="slide level2">
+<h2>Data sharing via Keeper</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/keeper-logo.svg" style="width:20.0%"></p>
+<figcaption><a href="https://keeper.mpdl.mpg.de/">keeper.mpdl.mpg.de</a></figcaption>
+</figure>
+</div>
+<blockquote>
+<p>“<em>A free service for all Max Planck employees and project partners with <strong>more than 1TB of storage per user</strong> for your researchdata. Profit from safe data storage, seamlessly integrated into your research workflow.</em>”</p>
+</blockquote>
+<ul>
+<li>&gt; 1 TB per Max Planck employee (and expandable):</li>
+<li>based on the cloud-sharing service <a href="https://www.seafile.com/en/home/">Seafile</a> (similar to Dropbox)</li>
+<li>data hosted on MPS servers</li>
+<li>configurable as a <a href="http://handbook.datalad.org/en/latest/basics/101-139-dropbox.html">DataLad special remote</a></li>
+</ul>
+</section>
+<section id="walkthrough-data-sharing-via-keeper" class="slide level2">
+<h2>Walkthrough: Data sharing via Keeper</h2>
+<p>Configure <code>rclone</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="ex">rclone</span> config</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="ex">2024/03/19</span> 11:45:32 NOTICE: Config file <span class="st">"/root/.config/rclone/rclone.conf"</span> not found <span class="at">-</span> using defaults</span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="ex">No</span> remotes found, make a new one<span class="pp">?</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="ex">n</span><span class="er">)</span> <span class="ex">New</span> remote</span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="ex">s</span><span class="er">)</span> <span class="ex">Set</span> configuration password</span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="ex">q</span><span class="er">)</span> <span class="ex">Quit</span> config</span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="ex">name</span><span class="op">&gt;</span> neuro-data</span>
+<span id="cb17-8"><a href="#cb17-8"></a></span>
+<span id="cb17-9"><a href="#cb17-9"></a><span class="ex">Option</span> Storage.</span>
+<span id="cb17-10"><a href="#cb17-10"></a><span class="ex">Type</span> of storage to configure.</span>
+<span id="cb17-11"><a href="#cb17-11"></a><span class="ex">Choose</span> a number from below, or type in your own value.</span>
+<span id="cb17-12"><a href="#cb17-12"></a> <span class="ex">1</span> / 1Fichier</span>
+<span id="cb17-13"><a href="#cb17-13"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">fichier</span><span class="kw">)</span></span>
+<span id="cb17-14"><a href="#cb17-14"></a> <span class="ex">2</span> / Akamai NetStorage</span>
+<span id="cb17-15"><a href="#cb17-15"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">netstorage</span><span class="kw">)</span></span>
+<span id="cb17-16"><a href="#cb17-16"></a> <span class="ex">3</span> / Alias for an existing remote</span>
+<span id="cb17-17"><a href="#cb17-17"></a>   <span class="ex">\ </span><span class="er">(</span><span class="bu">alias</span><span class="kw">)</span></span>
+<span id="cb17-18"><a href="#cb17-18"></a> <span class="ex">4</span> / Amazon S3 Compliant Storage Providers including AWS, Alibaba, ArvanCloud, Ceph, ChinaMobile, Cloudflare, DigitalOcean, Dreamhost, GCS, HuaweiOBS, IBMCOS, IDrive, IONOS, LyveCloud, Leviia, Liara, Linode, Minio, Netease, Petabox, RackCorp, Rclone, Scaleway, SeaweedFS, StackPath, Storj, Synology, TencentCOS, Wasabi, Qiniu and others</span>
+<span id="cb17-19"><a href="#cb17-19"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">s3</span><span class="kw">)</span></span>
+<span id="cb17-20"><a href="#cb17-20"></a> <span class="ex">5</span> / Backblaze B2</span>
+<span id="cb17-21"><a href="#cb17-21"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">b2</span><span class="kw">)</span></span>
+<span id="cb17-22"><a href="#cb17-22"></a> <span class="ex">6</span> / Better checksums for other remotes</span>
+<span id="cb17-23"><a href="#cb17-23"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">hasher</span><span class="kw">)</span></span>
+<span id="cb17-24"><a href="#cb17-24"></a> <span class="ex">7</span> / Box</span>
+<span id="cb17-25"><a href="#cb17-25"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">box</span><span class="kw">)</span></span>
+<span id="cb17-26"><a href="#cb17-26"></a> <span class="ex">8</span> / Cache a remote</span>
+<span id="cb17-27"><a href="#cb17-27"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">cache</span><span class="kw">)</span></span>
+<span id="cb17-28"><a href="#cb17-28"></a> <span class="ex">9</span> / Citrix Sharefile</span>
+<span id="cb17-29"><a href="#cb17-29"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">sharefile</span><span class="kw">)</span></span>
+<span id="cb17-30"><a href="#cb17-30"></a><span class="ex">10</span> / Combine several remotes into one</span>
+<span id="cb17-31"><a href="#cb17-31"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">combine</span><span class="kw">)</span></span>
+<span id="cb17-32"><a href="#cb17-32"></a><span class="ex">11</span> / Compress a remote</span>
+<span id="cb17-33"><a href="#cb17-33"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">compress</span><span class="kw">)</span></span>
+<span id="cb17-34"><a href="#cb17-34"></a><span class="ex">12</span> / Dropbox</span>
+<span id="cb17-35"><a href="#cb17-35"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">dropbox</span><span class="kw">)</span></span>
+<span id="cb17-36"><a href="#cb17-36"></a><span class="ex">13</span> / Encrypt/Decrypt a remote</span>
+<span id="cb17-37"><a href="#cb17-37"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">crypt</span><span class="kw">)</span></span>
+<span id="cb17-38"><a href="#cb17-38"></a><span class="ex">14</span> / Enterprise File Fabric</span>
+<span id="cb17-39"><a href="#cb17-39"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">filefabric</span><span class="kw">)</span></span>
+<span id="cb17-40"><a href="#cb17-40"></a><span class="ex">15</span> / FTP</span>
+<span id="cb17-41"><a href="#cb17-41"></a>   <span class="ex">\ </span><span class="er">(</span><span class="fu">ftp</span><span class="kw">)</span></span>
+<span id="cb17-42"><a href="#cb17-42"></a><span class="ex">16</span> / Google Cloud Storage <span class="er">(</span><span class="ex">this</span> is not Google Drive<span class="kw">)</span></span>
+<span id="cb17-43"><a href="#cb17-43"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">google</span> cloud storage<span class="kw">)</span></span>
+<span id="cb17-44"><a href="#cb17-44"></a><span class="ex">17</span> / Google Drive</span>
+<span id="cb17-45"><a href="#cb17-45"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">drive</span><span class="kw">)</span></span>
+<span id="cb17-46"><a href="#cb17-46"></a><span class="ex">18</span> / Google Photos</span>
+<span id="cb17-47"><a href="#cb17-47"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">google</span> photos<span class="kw">)</span></span>
+<span id="cb17-48"><a href="#cb17-48"></a><span class="ex">19</span> / HTTP</span>
+<span id="cb17-49"><a href="#cb17-49"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">http</span><span class="kw">)</span></span>
+<span id="cb17-50"><a href="#cb17-50"></a><span class="ex">20</span> / Hadoop distributed file system</span>
+<span id="cb17-51"><a href="#cb17-51"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">hdfs</span><span class="kw">)</span></span>
+<span id="cb17-52"><a href="#cb17-52"></a><span class="ex">21</span> / HiDrive</span>
+<span id="cb17-53"><a href="#cb17-53"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">hidrive</span><span class="kw">)</span></span>
+<span id="cb17-54"><a href="#cb17-54"></a><span class="ex">22</span> / ImageKit.io</span>
+<span id="cb17-55"><a href="#cb17-55"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">imagekit</span><span class="kw">)</span></span>
+<span id="cb17-56"><a href="#cb17-56"></a><span class="ex">23</span> / In memory object storage system.</span>
+<span id="cb17-57"><a href="#cb17-57"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">memory</span><span class="kw">)</span></span>
+<span id="cb17-58"><a href="#cb17-58"></a><span class="ex">24</span> / Internet Archive</span>
+<span id="cb17-59"><a href="#cb17-59"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">internetarchive</span><span class="kw">)</span></span>
+<span id="cb17-60"><a href="#cb17-60"></a><span class="ex">25</span> / Jottacloud</span>
+<span id="cb17-61"><a href="#cb17-61"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">jottacloud</span><span class="kw">)</span></span>
+<span id="cb17-62"><a href="#cb17-62"></a><span class="ex">26</span> / Koofr, Digi Storage and other Koofr-compatible storage providers</span>
+<span id="cb17-63"><a href="#cb17-63"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">koofr</span><span class="kw">)</span></span>
+<span id="cb17-64"><a href="#cb17-64"></a><span class="ex">27</span> / Linkbox</span>
+<span id="cb17-65"><a href="#cb17-65"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">linkbox</span><span class="kw">)</span></span>
+<span id="cb17-66"><a href="#cb17-66"></a><span class="ex">28</span> / Local Disk</span>
+<span id="cb17-67"><a href="#cb17-67"></a>   <span class="ex">\ </span><span class="er">(</span><span class="bu">local</span><span class="kw">)</span></span>
+<span id="cb17-68"><a href="#cb17-68"></a><span class="ex">29</span> / Mail.ru Cloud</span>
+<span id="cb17-69"><a href="#cb17-69"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">mailru</span><span class="kw">)</span></span>
+<span id="cb17-70"><a href="#cb17-70"></a><span class="ex">30</span> / Mega</span>
+<span id="cb17-71"><a href="#cb17-71"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">mega</span><span class="kw">)</span></span>
+<span id="cb17-72"><a href="#cb17-72"></a><span class="ex">31</span> / Microsoft Azure Blob Storage</span>
+<span id="cb17-73"><a href="#cb17-73"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">azureblob</span><span class="kw">)</span></span>
+<span id="cb17-74"><a href="#cb17-74"></a><span class="ex">32</span> / Microsoft Azure Files</span>
+<span id="cb17-75"><a href="#cb17-75"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">azurefiles</span><span class="kw">)</span></span>
+<span id="cb17-76"><a href="#cb17-76"></a><span class="ex">33</span> / Microsoft OneDrive</span>
+<span id="cb17-77"><a href="#cb17-77"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">onedrive</span><span class="kw">)</span></span>
+<span id="cb17-78"><a href="#cb17-78"></a><span class="ex">34</span> / OpenDrive</span>
+<span id="cb17-79"><a href="#cb17-79"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">opendrive</span><span class="kw">)</span></span>
+<span id="cb17-80"><a href="#cb17-80"></a><span class="ex">35</span> / OpenStack Swift <span class="er">(</span><span class="ex">Rackspace</span> Cloud Files, Blomp Cloud Storage, Memset Memstore, OVH<span class="kw">)</span></span>
+<span id="cb17-81"><a href="#cb17-81"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">swift</span><span class="kw">)</span></span>
+<span id="cb17-82"><a href="#cb17-82"></a><span class="ex">36</span> / Oracle Cloud Infrastructure Object Storage</span>
+<span id="cb17-83"><a href="#cb17-83"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">oracleobjectstorage</span><span class="kw">)</span></span>
+<span id="cb17-84"><a href="#cb17-84"></a><span class="ex">37</span> / Pcloud</span>
+<span id="cb17-85"><a href="#cb17-85"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">pcloud</span><span class="kw">)</span></span>
+<span id="cb17-86"><a href="#cb17-86"></a><span class="ex">38</span> / PikPak</span>
+<span id="cb17-87"><a href="#cb17-87"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">pikpak</span><span class="kw">)</span></span>
+<span id="cb17-88"><a href="#cb17-88"></a><span class="ex">39</span> / Proton Drive</span>
+<span id="cb17-89"><a href="#cb17-89"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">protondrive</span><span class="kw">)</span></span>
+<span id="cb17-90"><a href="#cb17-90"></a><span class="ex">40</span> / Put.io</span>
+<span id="cb17-91"><a href="#cb17-91"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">putio</span><span class="kw">)</span></span>
+<span id="cb17-92"><a href="#cb17-92"></a><span class="ex">41</span> / QingCloud Object Storage</span>
+<span id="cb17-93"><a href="#cb17-93"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">qingstor</span><span class="kw">)</span></span>
+<span id="cb17-94"><a href="#cb17-94"></a><span class="ex">42</span> / Quatrix by Maytech</span>
+<span id="cb17-95"><a href="#cb17-95"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">quatrix</span><span class="kw">)</span></span>
+<span id="cb17-96"><a href="#cb17-96"></a><span class="ex">43</span> / SMB / CIFS</span>
+<span id="cb17-97"><a href="#cb17-97"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">smb</span><span class="kw">)</span></span>
+<span id="cb17-98"><a href="#cb17-98"></a><span class="ex">44</span> / SSH/SFTP</span>
+<span id="cb17-99"><a href="#cb17-99"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">sftp</span><span class="kw">)</span></span>
+<span id="cb17-100"><a href="#cb17-100"></a><span class="ex">45</span> / Sia Decentralized Cloud</span>
+<span id="cb17-101"><a href="#cb17-101"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">sia</span><span class="kw">)</span></span>
+<span id="cb17-102"><a href="#cb17-102"></a><span class="ex">46</span> / Storj Decentralized Cloud Storage</span>
+<span id="cb17-103"><a href="#cb17-103"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">storj</span><span class="kw">)</span></span>
+<span id="cb17-104"><a href="#cb17-104"></a><span class="ex">47</span> / Sugarsync</span>
+<span id="cb17-105"><a href="#cb17-105"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">sugarsync</span><span class="kw">)</span></span>
+<span id="cb17-106"><a href="#cb17-106"></a><span class="ex">48</span> / Transparently chunk/split large files</span>
+<span id="cb17-107"><a href="#cb17-107"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">chunker</span><span class="kw">)</span></span>
+<span id="cb17-108"><a href="#cb17-108"></a><span class="ex">49</span> / Union merges the contents of several upstream fs</span>
+<span id="cb17-109"><a href="#cb17-109"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">union</span><span class="kw">)</span></span>
+<span id="cb17-110"><a href="#cb17-110"></a><span class="ex">50</span> / Uptobox</span>
+<span id="cb17-111"><a href="#cb17-111"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">uptobox</span><span class="kw">)</span></span>
+<span id="cb17-112"><a href="#cb17-112"></a><span class="ex">51</span> / WebDAV</span>
+<span id="cb17-113"><a href="#cb17-113"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">webdav</span><span class="kw">)</span></span>
+<span id="cb17-114"><a href="#cb17-114"></a><span class="ex">52</span> / Yandex Disk</span>
+<span id="cb17-115"><a href="#cb17-115"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">yandex</span><span class="kw">)</span></span>
+<span id="cb17-116"><a href="#cb17-116"></a><span class="ex">53</span> / Zoho</span>
+<span id="cb17-117"><a href="#cb17-117"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">zoho</span><span class="kw">)</span></span>
+<span id="cb17-118"><a href="#cb17-118"></a><span class="ex">54</span> / premiumize.me</span>
+<span id="cb17-119"><a href="#cb17-119"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">premiumizeme</span><span class="kw">)</span></span>
+<span id="cb17-120"><a href="#cb17-120"></a><span class="ex">55</span> / seafile</span>
+<span id="cb17-121"><a href="#cb17-121"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">seafile</span><span class="kw">)</span></span>
+<span id="cb17-122"><a href="#cb17-122"></a><span class="ex">Storage</span><span class="op">&gt;</span> seafile</span>
+<span id="cb17-123"><a href="#cb17-123"></a></span>
+<span id="cb17-124"><a href="#cb17-124"></a><span class="ex">Option</span> url.</span>
+<span id="cb17-125"><a href="#cb17-125"></a><span class="ex">URL</span> of seafile host to connect to.</span>
+<span id="cb17-126"><a href="#cb17-126"></a><span class="ex">Choose</span> a number from below, or type in your own value.</span>
+<span id="cb17-127"><a href="#cb17-127"></a> <span class="ex">1</span> / Connect to cloud.seafile.com.</span>
+<span id="cb17-128"><a href="#cb17-128"></a>   <span class="ex">\ </span><span class="er">(</span><span class="ex">https://cloud.seafile.com/</span><span class="kw">)</span></span>
+<span id="cb17-129"><a href="#cb17-129"></a><span class="ex">url</span><span class="op">&gt;</span> https://keeper.mpdl.mpg.de/</span>
+<span id="cb17-130"><a href="#cb17-130"></a></span>
+<span id="cb17-131"><a href="#cb17-131"></a><span class="ex">Option</span> user.</span>
+<span id="cb17-132"><a href="#cb17-132"></a><span class="ex">User</span> name <span class="er">(</span><span class="ex">usually</span> email address<span class="kw">)</span><span class="bu">.</span></span>
+<span id="cb17-133"><a href="#cb17-133"></a><span class="ex">Enter</span> a value.</span>
+<span id="cb17-134"><a href="#cb17-134"></a><span class="ex">user</span><span class="op">&gt;</span> wittkuhn@mpib-berlin.mpg.de</span>
+<span id="cb17-135"><a href="#cb17-135"></a></span>
+<span id="cb17-136"><a href="#cb17-136"></a><span class="ex">Option</span> pass.</span>
+<span id="cb17-137"><a href="#cb17-137"></a><span class="ex">Password.</span></span>
+<span id="cb17-138"><a href="#cb17-138"></a><span class="ex">Choose</span> an alternative below. Press Enter for the default <span class="er">(</span><span class="ex">n</span><span class="kw">)</span><span class="bu">.</span></span>
+<span id="cb17-139"><a href="#cb17-139"></a><span class="ex">y</span><span class="er">)</span> <span class="ex">Yes,</span> type in my own password</span>
+<span id="cb17-140"><a href="#cb17-140"></a><span class="ex">g</span><span class="er">)</span> <span class="ex">Generate</span> random password</span>
+<span id="cb17-141"><a href="#cb17-141"></a><span class="ex">n</span><span class="er">)</span> <span class="ex">No,</span> leave this optional password blank <span class="er">(</span><span class="ex">default</span><span class="kw">)</span></span>
+<span id="cb17-142"><a href="#cb17-142"></a><span class="ex">y/g/n</span><span class="op">&gt;</span> y</span>
+<span id="cb17-143"><a href="#cb17-143"></a><span class="ex">Enter</span> the password:</span>
+<span id="cb17-144"><a href="#cb17-144"></a><span class="ex">password:</span></span>
+<span id="cb17-145"><a href="#cb17-145"></a><span class="ex">Confirm</span> the password:</span>
+<span id="cb17-146"><a href="#cb17-146"></a><span class="ex">password:</span></span>
+<span id="cb17-147"><a href="#cb17-147"></a></span>
+<span id="cb17-148"><a href="#cb17-148"></a><span class="ex">Option</span> 2fa.</span>
+<span id="cb17-149"><a href="#cb17-149"></a><span class="ex">Two-factor</span> authentication <span class="er">(</span><span class="st">'true'</span> if the account has 2FA enabled<span class="kw">)</span><span class="bu">.</span></span>
+<span id="cb17-150"><a href="#cb17-150"></a><span class="ex">Enter</span> a boolean value <span class="er">(</span><span class="fu">true</span> or false<span class="kw">)</span><span class="bu">.</span> Press Enter for the default <span class="er">(</span><span class="fu">false</span><span class="kw">)</span><span class="bu">.</span></span>
+<span id="cb17-151"><a href="#cb17-151"></a><span class="ex">2fa</span><span class="op">&gt;</span> false</span>
+<span id="cb17-152"><a href="#cb17-152"></a></span>
+<span id="cb17-153"><a href="#cb17-153"></a><span class="ex">Option</span> library.</span>
+<span id="cb17-154"><a href="#cb17-154"></a><span class="ex">Name</span> of the library.</span>
+<span id="cb17-155"><a href="#cb17-155"></a><span class="ex">Leave</span> blank to access all non-encrypted libraries.</span>
+<span id="cb17-156"><a href="#cb17-156"></a><span class="ex">Enter</span> a value. Press Enter to leave empty.</span>
+<span id="cb17-157"><a href="#cb17-157"></a><span class="ex">library</span><span class="op">&gt;</span> neuro-data</span>
+<span id="cb17-158"><a href="#cb17-158"></a></span>
+<span id="cb17-159"><a href="#cb17-159"></a><span class="ex">Option</span> library_key.</span>
+<span id="cb17-160"><a href="#cb17-160"></a><span class="ex">Library</span> password <span class="er">(</span><span class="cf">for</span> encrypted <span class="ex">libraries</span> only<span class="kw">)</span><span class="bu">.</span></span>
+<span id="cb17-161"><a href="#cb17-161"></a><span class="ex">Leave</span> blank if you pass it through the command line.</span>
+<span id="cb17-162"><a href="#cb17-162"></a><span class="ex">Choose</span> an alternative below. Press Enter for the default <span class="er">(</span><span class="ex">n</span><span class="kw">)</span><span class="bu">.</span></span>
+<span id="cb17-163"><a href="#cb17-163"></a><span class="ex">y</span><span class="er">)</span> <span class="ex">Yes,</span> type in my own password</span>
+<span id="cb17-164"><a href="#cb17-164"></a><span class="ex">g</span><span class="er">)</span> <span class="ex">Generate</span> random password</span>
+<span id="cb17-165"><a href="#cb17-165"></a><span class="ex">n</span><span class="er">)</span> <span class="ex">No,</span> leave this optional password blank <span class="er">(</span><span class="ex">default</span><span class="kw">)</span></span>
+<span id="cb17-166"><a href="#cb17-166"></a><span class="ex">y/g/n</span><span class="op">&gt;</span> n</span>
+<span id="cb17-167"><a href="#cb17-167"></a></span>
+<span id="cb17-168"><a href="#cb17-168"></a><span class="ex">Edit</span> advanced config<span class="pp">?</span></span>
+<span id="cb17-169"><a href="#cb17-169"></a><span class="ex">y</span><span class="er">)</span> <span class="ex">Yes</span></span>
+<span id="cb17-170"><a href="#cb17-170"></a><span class="ex">n</span><span class="er">)</span> <span class="ex">No</span> <span class="er">(</span><span class="ex">default</span><span class="kw">)</span></span>
+<span id="cb17-171"><a href="#cb17-171"></a><span class="ex">y/n</span><span class="op">&gt;</span> n</span>
+<span id="cb17-172"><a href="#cb17-172"></a></span>
+<span id="cb17-173"><a href="#cb17-173"></a><span class="ex">Configuration</span> complete.</span>
+<span id="cb17-174"><a href="#cb17-174"></a><span class="ex">Options:</span></span>
+<span id="cb17-175"><a href="#cb17-175"></a><span class="ex">-</span> type: seafile</span>
+<span id="cb17-176"><a href="#cb17-176"></a><span class="ex">-</span> url: https://keeper.mpdl.mpg.de/</span>
+<span id="cb17-177"><a href="#cb17-177"></a><span class="ex">-</span> user: wittkuhn@mpib-berlin.mpg.de</span>
+<span id="cb17-178"><a href="#cb17-178"></a><span class="ex">-</span> pass: <span class="pp">***</span> ENCRYPTED <span class="pp">***</span></span>
+<span id="cb17-179"><a href="#cb17-179"></a><span class="ex">-</span> library: neuro-data</span>
+<span id="cb17-180"><a href="#cb17-180"></a><span class="ex">Keep</span> this <span class="st">"neuro-data"</span> remote<span class="pp">?</span></span>
+<span id="cb17-181"><a href="#cb17-181"></a><span class="ex">y</span><span class="er">)</span> <span class="ex">Yes</span> this is OK <span class="er">(</span><span class="ex">default</span><span class="kw">)</span></span>
+<span id="cb17-182"><a href="#cb17-182"></a><span class="ex">e</span><span class="er">)</span> <span class="ex">Edit</span> this remote</span>
+<span id="cb17-183"><a href="#cb17-183"></a><span class="ex">d</span><span class="er">)</span> <span class="ex">Delete</span> this remote</span>
+<span id="cb17-184"><a href="#cb17-184"></a><span class="ex">y/e/d</span><span class="op">&gt;</span> y</span>
+<span id="cb17-185"><a href="#cb17-185"></a></span>
+<span id="cb17-186"><a href="#cb17-186"></a><span class="ex">Current</span> remotes:</span>
+<span id="cb17-187"><a href="#cb17-187"></a></span>
+<span id="cb17-188"><a href="#cb17-188"></a><span class="ex">Name</span>                 Type</span>
+<span id="cb17-189"><a href="#cb17-189"></a><span class="ex">====</span>                 ====</span>
+<span id="cb17-190"><a href="#cb17-190"></a><span class="ex">neuro-data</span>           seafile</span>
+<span id="cb17-191"><a href="#cb17-191"></a></span>
+<span id="cb17-192"><a href="#cb17-192"></a><span class="ex">e</span><span class="er">)</span> <span class="ex">Edit</span> existing remote</span>
+<span id="cb17-193"><a href="#cb17-193"></a><span class="ex">n</span><span class="er">)</span> <span class="ex">New</span> remote</span>
+<span id="cb17-194"><a href="#cb17-194"></a><span class="ex">d</span><span class="er">)</span> <span class="ex">Delete</span> remote</span>
+<span id="cb17-195"><a href="#cb17-195"></a><span class="ex">r</span><span class="er">)</span> <span class="ex">Rename</span> remote</span>
+<span id="cb17-196"><a href="#cb17-196"></a><span class="ex">c</span><span class="er">)</span> <span class="ex">Copy</span> remote</span>
+<span id="cb17-197"><a href="#cb17-197"></a><span class="ex">s</span><span class="er">)</span> <span class="ex">Set</span> configuration password</span>
+<span id="cb17-198"><a href="#cb17-198"></a><span class="ex">q</span><span class="er">)</span> <span class="ex">Quit</span> config</span>
+<span id="cb17-199"><a href="#cb17-199"></a><span class="ex">e/n/d/r/c/s/q</span><span class="op">&gt;</span> q</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="bu">export</span> <span class="va">KEEPER_PASSWORD</span><span class="op">=</span>password</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="ex">rclone</span> config create neuro-data seafile url https://keeper.mpdl.mpg.de/ user wittkuhn@mpib-berlin.mpg.de library neuro-data pass <span class="va">$KEEPER_PASSWORD</span></span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">git</span> annex initremote keeper type=external externaltype=rclone chunk=50MiB encryption=none target=neuro-data</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1"></a><span class="ex">initremote</span> keeper ok</span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="kw">(</span><span class="ex">recording</span> state in git...<span class="kw">)</span></span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1"></a><span class="ex">datalad</span> siblings</span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="ex">.:</span> here<span class="er">(</span><span class="ex">+</span><span class="kw">)</span> <span class="ex">[git]</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="ex">.:</span> keeper<span class="er">(</span><span class="ex">+</span><span class="kw">)</span> <span class="ex">[rclone]</span></span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a><span class="ex">datalad</span> push <span class="at">--to</span> keeper</span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="ex">copy</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> CHANGES <span class="er">(</span><span class="fu">file</span><span class="kw">)</span> <span class="ex">[to</span> keeper...]</span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="ex">copy</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> README <span class="er">(</span><span class="fu">file</span><span class="kw">)</span> <span class="ex">[to</span> keeper...]</span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="ex">copy</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> dataset_description.json <span class="er">(</span><span class="fu">file</span><span class="kw">)</span> <span class="ex">[to</span> keeper...]</span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="ex">copy</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> sub-01/anat/sub-01_T1w.nii <span class="er">(</span><span class="fu">file</span><span class="kw">)</span> <span class="ex">[to</span> keeper...]</span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="ex">copy</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> sub-01/func/sub-01_task-auditory_bold.nii <span class="er">(</span><span class="fu">file</span><span class="kw">)</span> <span class="ex">[to</span> keeper...]</span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="ex">copy</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> sub-01/func/sub-01_task-auditory_events.tsv <span class="er">(</span><span class="fu">file</span><span class="kw">)</span> <span class="ex">[to</span> keeper...]</span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="ex">copy</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> task-auditory_bold.json <span class="er">(</span><span class="fu">file</span><span class="kw">)</span> <span class="ex">[to</span> keeper...]            action summary:</span>
+<span id="cb22-9"><a href="#cb22-9"></a>  <span class="ex">copy</span> <span class="er">(</span><span class="ex">ok:</span> 7<span class="kw">)</span></span></code></pre></div>
+</div>
+</section>
+<section id="sharing-datalad-datasets-via-edmond" class="slide level2">
+<h2>Sharing DataLad datasets via Edmond</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/edmond-logo.jpg" style="width:100.0%"></p>
+<figcaption><a href="https://edmond.mpg.de/">edmond.mpg.de</a></figcaption>
+</figure>
+</div>
+<blockquote>
+<p>“<em>Edmond is a research data repository for Max Planck researchers. It is the place to store completed datasets of research data with open access. Edmond serves the publication of research data from all disciplines and offers scientists the ability to create citable research objects.</em>”</p>
+</blockquote>
+<ul>
+<li>based on <a href="https://dataverse.org/">Dataverse</a>, hosted on MPS servers</li>
+<li>use is free of charge</li>
+<li>no storage limitation (on datasets or individual files)</li>
+<li>flexible licensing</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<h4 id="datalad---dataverse-integration-details-here">DataLad - Dataverse integration (details <a href="">here</a>)</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/datalad-dataverse.png" style="width:60.0%"></p>
+<figcaption><a href="http://docs.datalad.org/projects/dataverse/en/latest/">DataLad - Dataverse integration</a></figcaption>
+</figure>
+</div>
+<ul>
+<li>push / clone DataLad datasets to / from Edmond</li>
+<li>primarily for one-time dataset publication and consumption, not extensive collaboration</li>
+</ul>
+<h4 id="two-modes">Two modes:</h4>
+<ol type="1">
+<li><p><strong>annex mode</strong> (default): non-human readable representation of the dataset that includes Git history and annexed data</p></li>
+<li><p><strong>filetree mode</strong>: human readable single snapshot of your dataset “as it currently is” that does not include history of annexed files (but Git history)</p></li>
+</ol>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>nach Hackathon während des Meetings der Organization for Human Brain Mapping (OHBM) gibt es seit Juli 2022 eine DataLad-Dataverse Integration (noch nicht getestest!)</li>
+</ul>
+<p>With datalad-dataverse, the entire dataset is deposited on a Dataverse installation. Internally, this is achieved by packaging the “Git” part and depositing it alongside the annexed data, similar to how the datalad-next extensions allows to do this for webdav based services.</p>
+<p>The primary use case for dataverse siblings is dataset deposition, where only one site is uploading dataset and file content updates for others to reuse. Compared to workflows which use repository hosting services, this solution will be less flexible for collaboration (because it’s not able to utilise features for controlling dataset history offered by repository hosting services, such as pull requests and conflict resolution), and might be slower (when it comes to file transfer). What it offers, however, is the ability to make the published dataset browsable like regular directories and amendable with metadata on the Dataverse instance while being cloneable through DataLad.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="walkthough-sharing-datalad-datasets-via-edmond" class="slide level2">
+<h2>Walkthough: Sharing DataLad datasets via Edmond</h2>
+<p>If you want to publish a dataset to Dataverse, you will need a dedicated location on Dataverse that we will publish our dataset to. For this, we will use a Dataverse dataset<a href="#/footnotes" class="footnote-ref" id="fnref3" role="doc-noteref" data-footnote-href="#/fn3" onclick=""><sup>3</sup></a>.</p>
+<ol type="1">
+<li>Go to <a href="https://edmond.mpg.de/">Edmond</a>, log in, and create a new draft Dataverse dataset via the <code>Add Data</code> header</li>
+<li>The <code>New Dataset</code> button takes you to a configurator for your Dataverse dataset. Provide all relevant details and metadata entries in the form<a href="#/footnotes" class="footnote-ref" id="fnref4" role="doc-noteref" data-footnote-href="#/fn4" onclick=""><sup>4</sup></a>. Importantly, <strong>don’t upload any of your data files</strong> - this will be done by DataLad later.</li>
+<li>Once you have clicked <code>Save Dataset</code>, you’ll have a draft Dataverse dataset. It already has a DOI, and you can find it under the Metadata tab as “Persistent identifier”:</li>
+<li>Finally, make a note of the URL of your dataverse instance (e.g., <a href="https://edmond.mpg.de/" class="uri">https://edmond.mpg.de/</a>), and the DOI of your draft dataset. You will need this information for step 3.</li>
+</ol>
+<h3 id="add-a-dataverse-sibling-to-your-dataset">Add a Dataverse sibling to your dataset</h3>
+<p>We will use the <code>datalad add-sibling-dataverse</code> command. This command registers the remote Dataverse Dataset as a known remote location to your Dataset and will allow you to publish the entire Dataset (Git history and annexed data) or parts of it to Dataverse.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1"></a><span class="ex">datalad</span> add-sibling-dataverse https://edmond.mpg.de/ doi:10.17617/3.KUKEKI</span></code></pre></div>
+</div>
+<p>If you run this command for the first time, you will need to provide an API Token to authenticate against the chosen Dataverse instance in an interactive prompt. This is how this would look:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1"></a><span class="ex">A</span> dataverse API token is required for access. Find it at https://edmond.mpg.de by clicking on your name at the top right corner and then clicking on API Token</span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="ex">token:</span> </span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="ex">A</span> dataverse API token is required for access. Find it at https://edmond.mpg.de by clicking on your name at the top right corner and then clicking on API Token</span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="ex">token</span> <span class="er">(</span><span class="ex">repeat</span><span class="kw">)</span><span class="bu">:</span> </span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="ex">Enter</span> a name to save the credential securely for future reuse, or <span class="st">'skip'</span> to not save the credential</span>
+<span id="cb24-6"><a href="#cb24-6"></a><span class="ex">name:</span> </span></code></pre></div>
+</div>
+<p>You’ll find this token if you follow the instructions in the prompt under your user account on your Dataverse instance, and you can copy-paste it into the command line.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1"></a><span class="ex">add_sibling_dataverse.storage</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> . [dataverse-storage: https://edmond.mpg.de/ <span class="er">(</span><span class="ex">DOI:</span> doi:10.17617/3.KUKEKI<span class="kw">)</span><span class="ex">]</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="ex">[INFO</span>   ] Configure additional publication dependency on <span class="st">"dataverse-storage"</span></span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1"></a><span class="ex">A</span> dataverse API token is required for access. Find it at https://edmond.mpg.de by clicking on your name at the top right corner and then clicking on API Token</span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="ex">token:</span> </span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="ex">A</span> dataverse API token is required for access. Find it at https://edmond.mpg.de by clicking on your name at the top right corner and then clicking on API Token</span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="ex">token</span> <span class="er">(</span><span class="ex">repeat</span><span class="kw">)</span><span class="bu">:</span> </span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="ex">Enter</span> a name to save the credential securely for future reuse, or <span class="st">'skip'</span> to not save the credential</span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="ex">name:</span> skip</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1"></a><span class="ex">add_sibling_dataverse</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> . [dataverse: datalad-annex::<span class="pp">?</span>type=external<span class="kw">&amp;</span><span class="va">externaltype</span><span class="op">=</span>dataverse<span class="kw">&amp;</span><span class="va">encryption</span><span class="op">=</span>none<span class="kw">&amp;</span><span class="va">exporttree</span><span class="op">=</span>no<span class="kw">&amp;</span><span class="va">url</span><span class="op">=</span>https%3A//edmond.mpg.de/<span class="kw">&amp;</span><span class="va">doi</span><span class="op">=</span>doi:10.17617/3.KUKEKI <span class="kw">(</span><span class="ex">DOI:</span> doi:10.17617/3.KUKEKI<span class="kw">)</span><span class="ex">]</span></span></code></pre></div>
+</div>
+<p>As soon as you’ve created the sibling, you can push:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1"></a><span class="ex">datalad</span> push <span class="at">--to</span> dataverse</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1"></a><span class="ex">copy</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> CHANGES <span class="er">(</span><span class="fu">file</span><span class="kw">)</span> <span class="ex">[to</span> dataverse-storage...]</span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="ex">copy</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> README <span class="er">(</span><span class="fu">file</span><span class="kw">)</span> <span class="ex">[to</span> dataverse-storage...]</span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="ex">copy</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> dataset_description.json <span class="er">(</span><span class="fu">file</span><span class="kw">)</span> <span class="ex">[to</span> dataverse-storage...]</span>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="ex">copy</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> sub-01/anat/sub-01_T1w.nii <span class="er">(</span><span class="fu">file</span><span class="kw">)</span> <span class="ex">[to</span> dataverse-storage...]</span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="ex">copy</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> sub-01/func/sub-01_task-auditory_bold.nii <span class="er">(</span><span class="fu">file</span><span class="kw">)</span> <span class="ex">[to</span> dataverse-storage...]</span>
+<span id="cb29-6"><a href="#cb29-6"></a><span class="ex">copy</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> sub-01/func/sub-01_task-auditory_events.tsv <span class="er">(</span><span class="fu">file</span><span class="kw">)</span> <span class="ex">[to</span> dataverse-storage...]</span>
+<span id="cb29-7"><a href="#cb29-7"></a><span class="ex">copy</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> task-auditory_bold.json <span class="er">(</span><span class="fu">file</span><span class="kw">)</span> <span class="ex">[to</span> dataverse-storage...]</span>
+<span id="cb29-8"><a href="#cb29-8"></a><span class="ex">publish</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> . <span class="er">(</span><span class="ex">dataset</span><span class="kw">)</span> <span class="ex">[refs/heads/main-</span><span class="op">&gt;</span>dataverse:refs/heads/main [new branch]]</span>
+<span id="cb29-9"><a href="#cb29-9"></a><span class="ex">publish</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> . <span class="er">(</span><span class="ex">dataset</span><span class="kw">)</span> <span class="ex">[refs/heads/git-annex-</span><span class="op">&gt;</span>dataverse:refs/heads/git-annex [new branch]]  </span></code></pre></div>
+</div>
+<aside></aside></section>
+<section id="data-sharing-via-owncloud-nextcloud" class="slide level2">
+<h2>Data sharing via ownCloud / Nextcloud</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/owncloud-logo.svg"></p>
+<figcaption><a href="https://owncloud.gwdg.de/">owncloud.gwdg.de</a></figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/nextcloud-logo.svg"></p>
+<figcaption><a href="https://nextcloud.com/">nextcloud.com</a></figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><a href="http://docs.datalad.org/projects/next/en/latest/generated/datalad.api.create_sibling_webdav.html">DataLad NEXT</a> extension allows to push / clone DataLad datasets to / from ownCloud &amp; Nextcloud (via WebDAV)</p>
+<blockquote>
+<p><strong>ownCloud GWDG:</strong> “<em>50 GByte default storage space per user; flexible increase possible upon request</em>”</p>
+</blockquote>
+<h4 id="advantages-of-owncloud-and-nextcloud"><span class="emoji" data-emoji="sparkles">✨</span> Advantages of ownCloud and Nextcloud <span class="emoji" data-emoji="sparkles">✨</span></h4>
+<ul>
+<li>data privacy compliant alternative to Google Drive, Dropbox, etc. (often hosted on-site)</li>
+<li>provided by your institution, so free to use</li>
+<li>supports private and public repositories</li>
+<li>can be used together with external collaborators</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ol type="1">
+<li>Create a WebDAV sibling:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1"></a><span class="ex">datalad</span> create-sibling-webdav <span class="at">--dataset</span> . <span class="dt">\</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>  <span class="at">--name</span> owncloud-gwdg <span class="at">--mode</span> filetree <span class="dt">\</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a>  <span class="st">'https://owncloud.gwdg.de/remote.php/nonshib-webdav/neuro-data'</span></span></code></pre></div>
+</div>
+<ol start="2" type="1">
+<li>Enter access credentials</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1"></a><span class="ex">User</span> name and password are required for WebDAV access at https://owncloud.gwdg.de/remote.php/nonshib-webdav/neuro-data</span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="ex">user:</span> wittkuhn@mpib-berlin.mpg.de</span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="ex">password:</span> supersafepassword</span></code></pre></div>
+</div>
+<ol start="3" type="1">
+<li>Push dataset to ownCloud</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1"></a><span class="ex">datalad</span> push <span class="at">--to</span> owncloud-gwdg</span></code></pre></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/owncloud-screenshot.png" style="width:80.0%"></p>
+<figcaption>Access the dataset <a href="https://owncloud.gwdg.de/index.php/s/VcH0w7sGIcYonld">on owncloud.gwdg.de</a></figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="walkthrough-data-sharing-via-owncloud-nextcloud" class="slide level2">
+<h2>Walkthrough: Data sharing via ownCloud / nextCloud</h2>
+<h3 id="get-the-webdav-address">Get the WebDAV address</h3>
+<ol type="1">
+<li>Click on <i class="fa-solid fa-gear" aria-label="gear"></i> <code>Settings</code> (bottom left)</li>
+<li>Copy the WebDAV address, for example: <code>https://owncloud.gwdg.de/remote.php/nonshib-webdav/</code></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode numberSource bash code-annotation-code number-lines code-annotated"><code class="sourceCode bash"><span id="annotated-cell-14-1"><a href="#annotated-cell-14-1"></a><span class="ex">datalad</span> create-sibling-webdav <span class="dt">\</span></span>
+<span id="annotated-cell-14-2"><a href="#annotated-cell-14-2"></a>  <span class="at">--dataset</span> . <span class="dt">\</span></span>
+<span id="annotated-cell-14-3"><a href="#annotated-cell-14-3"></a>  <span class="at">--name</span> owncloud-gwdg <span class="dt">\</span></span>
+<span id="annotated-cell-14-4"><a href="#annotated-cell-14-4"></a>  <span class="at">--mode</span> filetree <span class="dt">\</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-14-5" class="code-annotation-target"><a href="#annotated-cell-14-5"></a>  <span class="st">'https://owncloud.gwdg.de/remote.php/nonshib-webdav/&lt;dataset-name&gt;'</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-annotation="1" data-code-lines="5">Replace <code>&lt;dataset-name&gt;</code> with the name of your dataset, i.e., the name of your dataset folder. In this example, we replace <code>&lt;dataset-name&gt;</code> with <code>neuro-data</code>. The complete command for your example hence looks like this:</span>
+</dd>
+</dl>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1"></a><span class="ex">datalad</span> create-sibling-webdav <span class="dt">\</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>  <span class="at">--dataset</span> . <span class="dt">\</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a>  <span class="at">--name</span> owncloud-gwdg <span class="dt">\</span></span>
+<span id="cb33-4"><a href="#cb33-4"></a>  <span class="at">--mode</span> filetree <span class="dt">\</span></span>
+<span id="cb33-5"><a href="#cb33-5"></a>  <span class="st">'https://owncloud.gwdg.de/remote.php/nonshib-webdav/neuro-data'</span></span></code></pre></div>
+</div>
+<p>You will be asked to provide your ownCloud account credentials:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-16"><pre class="sourceCode numberSource bash code-annotation-code number-lines code-annotated"><code class="sourceCode bash"><a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-16-1" class="code-annotation-target"><a href="#annotated-cell-16-1"></a><span class="ex">user:</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-16-2" class="code-annotation-target"><a href="#annotated-cell-16-2"></a><span class="ex">password:</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-16-3" class="code-annotation-target"><a href="#annotated-cell-16-3"></a><span class="ex">password</span> <span class="er">(</span><span class="ex">repeat</span><span class="kw">)</span><span class="bu">:</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-16" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-16" data-code-annotation="1" data-code-lines="1">Enter the email address of your ownCloud account.</span>
+</dd>
+<dt data-target-cell="annotated-cell-16" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-16" data-code-annotation="2" data-code-lines="2">Enter the password of your ownCloud account.</span>
+</dd>
+<dt data-target-cell="annotated-cell-16" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-16" data-code-annotation="3" data-code-lines="3">Repeat the password of your ownCloud account.</span>
+</dd>
+</dl>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1"></a><span class="ex">create_sibling_webdav.storage</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> . [owncloud-gwdg-storage: https://owncloud.gwdg.de/remote.php/nonshib-webdav/neuro-data]</span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="ex">[INFO</span>   ] Configure additional publication dependency on <span class="st">"owncloud-gwdg-storage"</span> </span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="ex">create_sibling_webdav</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> . [owncloud-gwdg: datalad-annex::<span class="pp">?</span>type=webdav<span class="kw">&amp;</span><span class="va">encryption</span><span class="op">=</span>none<span class="kw">&amp;</span><span class="va">exporttree</span><span class="op">=</span>yes<span class="kw">&amp;</span><span class="va">url</span><span class="op">=</span>https%3A//owncloud.gwdg.de/remote.php/nonshib-webdav/neuro-data]</span></code></pre></div>
+</div>
+<p>Finally, we can push the dataset to ownCloud:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-18"><pre class="sourceCode numberSource bash code-annotation-code number-lines code-annotated"><code class="sourceCode bash"><a class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-18-1" class="code-annotation-target"><a href="#annotated-cell-18-1"></a><span class="ex">datalad</span> push <span class="at">--to</span> owncloud-gwdg</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-18" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-18" data-code-annotation="1" data-code-lines="1">Use <code>datalad push</code> to push the dataset contents to ownCloud. For details on <code>datalad push</code>, see the <a href="http://docs.datalad.org/en/stable/generated/man/datalad-push.html">command line reference</a> and <a href="https://handbook.datalad.org/en/latest/basics/101-141-push.html">this chapter</a> in the DataLad Handbook.</span>
+</dd>
+</dl>
+</div>
+</div>
+<p>We can now view the <a href="https://owncloud.gwdg.de/index.php/apps/files/">files on ownCloud</a> and inspect them through the web browser:</p>
+<p><img data-src="../static/images/owncloud_datalad_push.png"></p>
+</section>
+<section id="data-sharing-via-gin" class="slide level2">
+<h2>Data sharing via GIN</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-left">
+<figure>
+<p><img data-src="images/gin-logo.png" style="width:100.0%"></p>
+<figcaption><a href="https://gin.g-node.org/">gin.g-node.org</a></figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:70%;">
+<p>“<em>GIN is […] a web-accessible repository store of your data <strong>based on git and git-annex</strong> that you can access securely anywhere you desire while keeping your data in sync, backed up and easily accessible […]“</em></p>
+</div>
+</div>
+<h4 id="advantages-of-gin"><span class="emoji" data-emoji="sparkles">✨</span> Advantages of GIN <span class="emoji" data-emoji="sparkles">✨</span></h4>
+<ul>
+<li>free to use and open-source (could be hosted within your institution; for more details, see <a href="https://gin.g-node.org/G-Node/Info/wiki/In+House">here</a>)</li>
+<li>currently unlimited storage capacity and no restrictions on individual file size</li>
+<li>supports private and public repositories</li>
+<li>publicly funded by the Federal Ministry of Education and Research (BMBF; details <a href="https://gin.g-node.org/G-Node/Info/wiki/about#support">here</a>)</li>
+<li>servers are on German land (Munich, Germany; cf.&nbsp;GDPR)</li>
+<li>provides Digital Object Identifiers (DOIs) (details <a href="https://gin.g-node.org/G-Node/Info/wiki/DOI">here</a>) and allows free licensing (details <a href="https://gin.g-node.org/G-Node/Info/wiki/Licensing">here</a>)</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ol type="1">
+<li>Create a GIN sibling:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1"></a><span class="ex">datalad</span> siblings add <span class="at">--dataset</span> . <span class="dt">\</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>--name gin <span class="at">--url</span> git@gin.g-node.org:/lnnrtwttkhn/neuro-data.git</span></code></pre></div>
+</div>
+<ol start="2" type="1">
+<li>Push dataset to GIN</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1"></a><span class="ex">datalad</span> push <span class="at">--to</span> gin</span></code></pre></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/gin-screenshot.png" style="width:100.0%"></p>
+<figcaption>Access the dataset <a href="https://gin.g-node.org/lnnrtwttkhn/neuro-data">on GIN</a></figcaption>
+</figure>
+</div>
+<ol start="3" type="1">
+<li>Clone dataset from GIN</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1"></a><span class="ex">datalad</span> clone https://gin.g-node.org/lnnrtwttkhn/neuro-data.git</span></code></pre></div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>Angebot des German Neuroinformatics Node (GNode) in München</li>
+<li>Fokus auf Neurowissenschaften, aber im Prinzip für Daten verschiedener Disziplinen verwendbar</li>
+<li>We have an <em>experimental</em> <a href="http://gin.mpib-berlin.mpg.de/">in-house GIN instance</a> with 5TB that can also host annexed data</li>
+<li>DataLad plays perfectly with GIN, since both use git + git-annex (details <a href="https://handbook.datalad.org/en/latest/basics/101-139-gin.html">here</a>)</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<h3 id="section"></h3>
 </section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
@@ -1030,7 +1709,7 @@
 <h3 id="science-is-modular-nesting">Science is modular: Nesting</h3>
 <h3 id="towards-science-as-open-source-knowledge-development">Towards science as open-source knowledge development</h3>
 </section>
-<section id="thank-you" class="slide level2">
+<section id="thank-you" class="slide level2 smaller scrollable">
 <h2>Thank you!</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
@@ -1060,12 +1739,19 @@
 <div class="footer footer-default">
 <p>Reproducible Research Data Management with DataLad</p>
 </div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-gorgolewski2016" class="csl-entry" role="listitem">
+Gorgolewski, Krzysztof J., Tibor Auer, Vince D. Calhoun, R. Cameron Craddock, Samir Das, Eugene P. Duff, Guillaume Flandin, et al. 2016. <span>“The Brain Imaging Data Structure, a Format for Organizing and Describing Outputs of Neuroimaging Experiments.”</span> <em>Scientific Data</em> 3 (1). <a href="https://doi.org/10.1038/sdata.2016.44">https://doi.org/10.1038/sdata.2016.44</a>.
+</div>
+</div>
 </section></section>
 <section id="footnotes" class="footnotes footnotes-end-of-document smaller scrollable" role="doc-endnotes"><h2>Footnotes</h2>
 
 <ol>
 <li id="fn1"><p>(Source: <a href="https://en.wikipedia.org/wiki/GitHub">Wikipedia</a>)</p></li>
 <li id="fn2"><p>see DataLad dataset of 80TB / 15 million files from the Human Connectome Project (see <a href="https://handbook.datalad.org/en/latest/usecases/HCP_dataset.html#usecase-hcp-dataset">details</a>)</p></li>
+<li id="fn3"><p>Dataverse datasets contain digital files (research data, code, …), amended with additional metadata. They typically live inside of dataverse collections.</p></li>
+<li id="fn4"><p>At least, <code>Title</code>, <code>Description</code>, and <code>Organization</code> are required.</p></li>
 </ol>
 </section>
     </div>
