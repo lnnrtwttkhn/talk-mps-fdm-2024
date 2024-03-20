@@ -483,38 +483,56 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/datalad-talk-screenshot.png" style="width:100.0%"></p>
-<figcaption><a href="https://files.inm7.de/adina/talks/html/hamburg_2024.html#/">Slides</a> by <span class="citation" data-cites="wagner2024">A. Wagner (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span> (<a href="https://github.com/datalad-handbook/datalad-course/blob/main/LICENSE">CC BY-SA 4.0</a>)</figcaption>
+<figcaption><a href="https://files.inm7.de/adina/talks/html/hamburg_2024.html#/">Slides</a> by <span class="citation" data-cites="wagner2024">Wagner (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span> (<a href="https://github.com/datalad-handbook/datalad-course/blob/main/LICENSE">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
 </div><div class="column" style="width:30%;">
-<p><strong>Slides and presentations on DataLad</strong> by Dr.&nbsp;Adina Wagner, e.g., “DataLad - Decentralized Management of Digital Objects for Open Science” <span class="citation" data-cites="wagner2024">(<a href="#/references" role="doc-biblioref" onclick="">A. Wagner 2024</a>)</span> and <a href="https://www.youtube.com/c/DataLad">on YouTube</a></p>
+<p><strong>Slides and presentations</strong> by Dr.&nbsp;Adina Wagner and the DataLad team, e.g., “DataLad - Decentralized Management of Digital Objects for Open Science” <span class="citation" data-cites="wagner2024">(<a href="#/references" role="doc-biblioref" onclick="">Wagner 2024</a>)</span></p>
 </div><div class="column" style="width:15%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/datalad-handbook-logo.svg" style="width:100.0%"></p>
-<figcaption><a href="https://handbook.datalad.org/en/latest/">DataLad Handbook</a> by <span class="citation" data-cites="wagner2022">A. S. Wagner et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> (<a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
+<figcaption><a href="https://handbook.datalad.org/en/latest/">DataLad Handbook</a><br>(<a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
 </div><div class="column" style="width:25%;">
-<p>The <strong>DataLad Handbook</strong> by <span class="citation" data-cites="wagner2022">A. S. Wagner et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> is a comprehensive educational resource for data management with DataLad.</p>
+<p>The <strong>DataLad Handbook</strong> by <span class="citation" data-cites="wagner2022">Wagner et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> is a comprehensive educational resource for data management with DataLad.</p>
+</div>
+</div>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:55%;">
+<h4 id="papers">Papers</h4>
+<ul>
+<li>Wilson et al.&nbsp;(2014). <a href="https://doi.org/10.1371/journal.pbio.1001745">Best practices for scientific computing</a>. <em>PLOS Biology</em>.</li>
+<li>Wilson et al.&nbsp;(2017). <a href="https://doi.org/10.1371/journal.pcbi.1005510">Good enough practices in scientific computing</a>. <em>PLOS Computational Biology</em>.</li>
+<li>Lowndes et al.&nbsp;(2017). <a href="https://doi.org/10.1038/s41559-017-0160">Our path to better science in less time using open data science tools</a>. <em>Nature Ecology Evolution</em>.</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<h4 id="talks">Talks</h4>
+<ul>
+<li>Richard McElreath (2020). <a href="https://www.youtube.com/watch?v=zwRdO9_GGhY">Science as amateur software development</a>. YouTube</li>
+<li>Russ Poldrack (2020). <a href="https://www.youtube.com/watch?v=XjW3t-qXAiE">Toward a Culture of Computational Reproducibility</a>. YouTube</li>
+</ul>
+<p>… and many more!</p>
+</div>
 </div>
 </div>
 </section>
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
-<ol type="1">
-<li><p><strong>Scientific workflows with DataLad</strong></p>
+<h3 id="scientific-workflows-with-datalad">1. Scientific workflows with DataLad</h3>
 <p>1.1 Version Control</p>
 <p>1.2 Modularity &amp; Linking</p>
 <p>1.3 Provenance</p>
-<p>1.4 Collaboration &amp; Interoperability</p></li>
-<li><p><strong>Integrating DataLad with MPS infrastructure (and beyond)</strong></p>
+<p>1.4 Collaboration &amp; Interoperability</p>
+<h3 id="integrating-datalad-with-mps-infrastructure-and-beyond">2. Integrating DataLad with MPS infrastructure (and beyond)</h3>
 <p>2.1 Keeper</p>
 <p>2.2 Edmond</p>
 <p>2.3 ownCloud / nextCloud</p>
-<p>2.4 GIN</p></li>
-<li><p><strong>Summary &amp; Discussion</strong></p></li>
-</ol>
+<p>2.4 GIN</p>
+<p>2.5 GitLab</p>
+<h3 id="summary-discussion">3. Summary &amp; Discussion</h3>
 </section>
 <section>
 <section id="scientific-building-blocks-are-not-static" class="title-slide slide level1 center">
@@ -592,7 +610,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/turing-way-version-control.svg" style="width:80.0%"></p>
-<figcaption><a href="https://zenodo.org/record/3695300/files/VersionControl.jpg?download=1">by Scriberia for The Turing Way community (CC BY 4.0)</a></figcaption>
+<figcaption>by <span class="citation" data-cites="theturingwaycommunity2024">The Turing Way Community and Scriberia (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span> (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>)</figcaption>
 </figure>
 </div>
 </div>
@@ -606,7 +624,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/turing-way-pull-request.svg" style="width:84.0%"></p>
-<figcaption><a href="https://zenodo.org/record/3695300/files/FirstPullRequest.jpg?download=1">by Scriberia for The Turing Way community (CC BY 4.0)</a></figcaption>
+<figcaption>by <span class="citation" data-cites="theturingwaycommunity2024">The Turing Way Community and Scriberia (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span> (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>)</figcaption>
 </figure>
 </div>
 </div>
@@ -621,7 +639,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/git-logo-full.svg" style="width:40.0%"></p>
-<figcaption><a href="https://git-scm.com/">git-scm.com</a> (Logo by Jason Long; License: <a href="https://git-scm.com/downloads/logos">CC BY 3.0 Unported</a>)</figcaption>
+<figcaption><a href="https://git-scm.com/">git-scm.com</a> (by Jason Long; <a href="https://git-scm.com/downloads/logos">CC BY 3.0 Unported</a>)</figcaption>
 </figure>
 </div>
 <ul>
@@ -645,7 +663,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/datalad-logo-full.svg" style="width:38.0%"></p>
-<figcaption><a href="https://www.datalad.org/">datalad.org</a></figcaption>
+<figcaption><a href="https://www.datalad.org/">datalad.org</a> (from the <a href="https://handbook.datalad.org/en/latest/index.html">DataLad Handbook</a> by <span class="citation" data-cites="wagner2022">Wagner et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>; <a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
 <ul>
@@ -697,7 +715,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/bids-logo.svg" style="width:70.0%"></p>
-<figcaption><a href="https://bids.neuroimaging.io/">Brain Imaging Data Structure (BIDS)</a> <span class="citation" data-cites="gorgolewski2016">Gorgolewski et al. (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span> (License: <a href="https://github.com/bids-standard/bids-specification?tab=CC-BY-4.0-1-ov-file#readme">CC BY 4.0</a>)</figcaption>
+<figcaption><a href="https://bids.neuroimaging.io/">Brain Imaging Data Structure (BIDS)</a> <span class="citation" data-cites="gorgolewski2016">Gorgolewski et al. (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span> (<a href="https://github.com/bids-standard/bids-specification?tab=CC-BY-4.0-1-ov-file#readme">CC BY 4.0</a>)</figcaption>
 </figure>
 </div>
 </div>
@@ -706,7 +724,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/bids-overview.png" style="width:100.0%"></p>
-<figcaption><a href="https://bids.neuroimaging.io/">Brain Imaging Data Structure (BIDS)</a> <span class="citation" data-cites="gorgolewski2016">Gorgolewski et al. (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span> (License: <a href="https://www.nature.com/articles/sdata201644#rightslink">CC BY 4.0</a>)</figcaption>
+<figcaption><a href="https://bids.neuroimaging.io/">Brain Imaging Data Structure (BIDS)</a> <span class="citation" data-cites="gorgolewski2016">Gorgolewski et al. (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span> (<a href="https://www.nature.com/articles/sdata201644#rightslink">CC BY 4.0</a>)</figcaption>
 </figure>
 </div>
 <div class="cell">
@@ -740,7 +758,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/datalad-dataset.svg" style="width:84.0%"></p>
-<figcaption>from the <a href="https://handbook.datalad.org/en/latest/intro/executive_summary.html">Datalad Handbook</a> (License: <a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/index.html">DataLad Handbook</a> by <span class="citation" data-cites="wagner2022">Wagner et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> (<a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
 <div class="cell">
@@ -766,7 +784,7 @@ View output
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/datalad-local_wf.svg" style="width:100.0%"></p>
-<figcaption>from the <a href="https://handbook.datalad.org/en/latest/intro/executive_summary.html">Datalad Handbook</a> (License: <a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/index.html">DataLad Handbook</a> by <span class="citation" data-cites="wagner2022">Wagner et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> (<a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
 <div class="cell">
@@ -819,7 +837,7 @@ View output
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/datalad-publishing-gitvsannex.svg" style="width:70.0%"></p>
-<figcaption>from the <a href="https://handbook.datalad.org/en/latest/index.html#">Datalad Handbook</a> (License: <a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/index.html">DataLad Handbook</a> by <span class="citation" data-cites="wagner2022">Wagner et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> (<a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
 <div class="columns">
@@ -882,7 +900,7 @@ View output
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/datalad-submodule-setup.svg" style="width:100.0%"></p>
-<figcaption>from the <a href="https://handbook.datalad.org/en/latest/intro/executive_summary.html">Datalad Handbook</a> (License: <a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/index.html">DataLad Handbook</a> by <span class="citation" data-cites="wagner2022">Wagner et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> (<a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
 </div>
@@ -902,7 +920,7 @@ View output
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/turing-way-research-cycle.svg" style="width:100.0%"></p>
-<figcaption><span class="citation" data-cites="theturingwaycommunity2024">The Turing Way Community and Scriberia (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span> (<a href="https://doi.org/10.5281/zenodo.3332807">CC BY 4.0</a>)</figcaption>
+<figcaption>by <span class="citation" data-cites="theturingwaycommunity2024">The Turing Way Community and Scriberia (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span> (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>)</figcaption>
 </figure>
 </div>
 </div>
@@ -950,7 +968,7 @@ View output
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/datalad-linkage-subds.svg" style="width:90.0%"></p>
-<figcaption>from the <a href="https://handbook.datalad.org/en/latest/basics/101-106-nesting.html">Datalad Handbook</a> (License: <a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/index.html">DataLad Handbook</a> by <span class="citation" data-cites="wagner2022">Wagner et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> (<a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
 <ul>
@@ -965,7 +983,7 @@ View output
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/datalad-linkage-subds.svg" style="width:40.0%"></p>
-<figcaption>from the <a href="https://handbook.datalad.org/en/latest/basics/101-106-nesting.html">Datalad Handbook</a> (License: <a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/index.html">DataLad Handbook</a> by <span class="citation" data-cites="wagner2022">Wagner et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> (<a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
 <div class="columns">
@@ -1064,7 +1082,7 @@ View output
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/datalad-linkage.svg" style="width:100.0%"></p>
-<figcaption>from the <a href="https://handbook.datalad.org/en/latest/basics/101-106-nesting.html">Datalad Handbook</a> (License: <a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/index.html">DataLad Handbook</a> by <span class="citation" data-cites="wagner2022">Wagner et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> (<a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
 </div>
@@ -1084,7 +1102,7 @@ View output
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/turing-way-provenance.svg" style="width:80.0%"></p>
-<figcaption><a href="https://zenodo.org/record/3695300/">by Scriberia for The Turing Way community (CC BY 4.0)</a></figcaption>
+<figcaption>by <span class="citation" data-cites="theturingwaycommunity2024">The Turing Way Community and Scriberia (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span> (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>)</figcaption>
 </figure>
 </div>
 </div>
@@ -1100,8 +1118,8 @@ View output
 </div>
 </div>
 </section>
-<section id="reusing-past-work-is-hard" class="slide level2">
-<h2>Reusing past work is hard</h2>
+<section id="reusing-previous-work-is-hard" class="slide level2">
+<h2>Reusing previous work is hard</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/phd-comic-scratch.gif" style="width:60.0%"></p>
@@ -1113,7 +1131,7 @@ View output
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/turing-way-version-control.svg" style="width:100.0%"></p>
-<figcaption><a href="https://zenodo.org/record/3695300/">by Scriberia for The Turing Way community (CC BY 4.0)</a></figcaption>
+<figcaption>by <span class="citation" data-cites="theturingwaycommunity2024">The Turing Way Community and Scriberia (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></figcaption>
 </figure>
 </div>
 </div><div class="column" style="width:15%;">
@@ -1122,6 +1140,7 @@ View output
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/turing-way-readable-code.svg" style="width:100.0%"></p>
+<figcaption>by <span class="citation" data-cites="theturingwaycommunity2024">The Turing Way Community and Scriberia (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span> (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>)</figcaption>
 </figure>
 </div>
 </div><div class="column" style="width:15%;">
@@ -1176,6 +1195,7 @@ View output
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/datalad-run-basic.svg" style="width:100.0%"></p>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/index.html">DataLad Handbook</a> by <span class="citation" data-cites="wagner2022">Wagner et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> (<a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
 </div>
@@ -1203,8 +1223,7 @@ View output
 <span id="cb14-5"><a href="#cb14-5"></a>        <span class="ex">[...]</span></span>
 <span id="cb14-6"><a href="#cb14-6"></a><span class="ex">[INFO</span>   ] == Command start <span class="er">(</span><span class="ex">output</span> follows<span class="kw">)</span> <span class="ex">=====</span></span>
 <span id="cb14-7"><a href="#cb14-7"></a><span class="ex">[INFO</span>   ] == Command exit <span class="er">(</span><span class="ex">modification</span> check follows<span class="kw">)</span> <span class="ex">=====</span></span>
-<span id="cb14-8"><a href="#cb14-8"></a><span class="ex">add</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> sub-01/LC_timeseries_run-<span class="pp">*</span>.csv<span class="er">(</span><span class="fu">file</span><span class="kw">)</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a>        <span class="ex">[...]</span></span></code></pre></div>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="ex">add</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> sub-01/LC_timeseries_run-<span class="pp">*</span>.csv<span class="er">(</span><span class="fu">file</span><span class="kw">)</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -1213,12 +1232,13 @@ View output
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/datalad-rerun.svg" style="width:80.0%"></p>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/index.html">DataLad Handbook</a> by <span class="citation" data-cites="wagner2022">Wagner et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> (<a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/datalad-containers-run-basic.svg" style="width:80.0%"></p>
-<figcaption><a href="https://handbook.datalad.org/en/latest/basics/basics-run.html">DataLad Handbook</a></figcaption>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/index.html">DataLad Handbook</a> by <span class="citation" data-cites="wagner2022">Wagner et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> (<a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
 <style type="text/css">
@@ -1275,7 +1295,8 @@ View output
 <p><strong>Challenge:</strong> Scientific workflows are idiosyncratic across institutions / departments / labs / any two scientists</p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="images/datalad-services-only.png" style="width:100.0%"></p>
+<p><img data-src="images/datalad-services-only.png" style="width:95.0%"></p>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/index.html">DataLad Handbook</a> by <span class="citation" data-cites="wagner2022">Wagner et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> (<a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
 </div>
@@ -1291,6 +1312,7 @@ View output
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/datalad-collaboration.svg" style="width:100.0%"></p>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/index.html">DataLad Handbook</a> by <span class="citation" data-cites="wagner2022">Wagner et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> (<a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
 </section>
@@ -1314,7 +1336,7 @@ View output
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/datalad-publishing-network.svg" style="width:55.0%"></p>
-<figcaption>see DataLad Handbook: <a href="https://handbook.datalad.org/en/latest/basics/101-138-sharethirdparty.html">“Beyond shared infrastructure”</a></figcaption>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/index.html">DataLad Handbook</a> by <span class="citation" data-cites="wagner2022">Wagner et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> (<a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
 </section>
@@ -1328,6 +1350,7 @@ View output
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/datalad-publishing-network-publish-gin.svg" style="width:100.0%"></p>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/index.html">DataLad Handbook</a> by <span class="citation" data-cites="wagner2022">Wagner et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> (<a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
 <div class="columns">
@@ -1353,6 +1376,7 @@ View output
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/datalad-publishing-network-publish-osf.svg" style="width:100.0%"></p>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/index.html">DataLad Handbook</a> by <span class="citation" data-cites="wagner2022">Wagner et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> (<a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
 <div class="columns">
@@ -1800,8 +1824,8 @@ View output
 </div>
 </div>
 </section>
-<section id="consume-datasets-like-source-code" class="slide level2">
-<h2>Consume datasets like source code</h2>
+<section id="publish-and-consume-datasets-like-source-code" class="slide level2">
+<h2>Publish and consume datasets like source code</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="fragment">
@@ -1831,6 +1855,7 @@ View output
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/datalad-collaboration.svg" style="width:100.0%"></p>
+<figcaption>from the <a href="https://handbook.datalad.org/en/latest/index.html">DataLad Handbook</a> by <span class="citation" data-cites="wagner2022">Wagner et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> (<a href="https://handbook.datalad.org/en/latest/licenses.html">CC BY-SA 4.0</a>)</figcaption>
 </figure>
 </div>
 <p>Clone the dataset from GitLab:</p>
@@ -1841,16 +1866,14 @@ View output
 <div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1"></a><span class="ex">[INFO</span>   ] access to 3 dataset siblings keeper, dataverse-storage,</span>
 <span id="cb37-2"><a href="#cb37-2"></a><span class="ex">owncloud-gwdg-storage</span> not auto-enabled, enable with:</span>
-<span id="cb37-3"><a href="#cb37-3"></a><span class="kw">|</span>       <span class="ex">datalad</span> siblings <span class="at">-d</span> <span class="st">"/tmp/neuro-data"</span> enable <span class="at">-s</span> SIBLING </span>
-<span id="cb37-4"><a href="#cb37-4"></a><span class="fu">install</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> /tmp/neuro-data-clone <span class="er">(</span><span class="ex">dataset</span><span class="kw">)</span></span></code></pre></div>
+<span id="cb37-3"><a href="#cb37-3"></a><span class="kw">|</span>       <span class="ex">datalad</span> siblings <span class="at">-d</span> <span class="st">"/tmp/neuro-data"</span> enable <span class="at">-s</span> SIBLING</span></code></pre></div>
 </div>
 <p>DataLad retrieves data from available sources (here, GIN):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb38" data-code-line-numbers="1"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1"></a><span class="ex">datalad</span> get .</span>
 <span id="cb38-2"><a href="#cb38-2"></a><span class="ex">get</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> CHANGES <span class="er">(</span><span class="fu">file</span><span class="kw">)</span> <span class="ex">[from</span> gin-src...]</span>
 <span id="cb38-3"><a href="#cb38-3"></a><span class="ex">get</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> README <span class="er">(</span><span class="fu">file</span><span class="kw">)</span> <span class="ex">[from</span> gin-src...]</span>
-<span id="cb38-4"><a href="#cb38-4"></a><span class="ex">get</span><span class="er">(</span><span class="ex">ok</span><span class="kw">)</span><span class="bu">:</span> dataset_description.json <span class="er">(</span><span class="fu">file</span><span class="kw">)</span> <span class="ex">[from</span> gin-src...]</span>
-<span id="cb38-5"><a href="#cb38-5"></a><span class="ex">[...]</span></span></code></pre></div>
+<span id="cb38-4"><a href="#cb38-4"></a><span class="ex">[...]</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -1959,7 +1982,7 @@ Gorgolewski, Krzysztof J., Tibor Auer, Vince D. Calhoun, R. Cameron Craddock, Sa
 The Turing Way Community, and Scriberia. 2024. <span>“Illustrations from the Turing Way: Shared Under CC-BY 4.0 for Reuse,”</span> January. <a href="https://doi.org/10.5281/ZENODO.3332807">https://doi.org/10.5281/ZENODO.3332807</a>.
 </div>
 <div id="ref-wagner2024" class="csl-entry" role="listitem">
-Wagner, Adina. 2024. <span>“DataLad: Decrentalized Management of Digital Objects for Open Science.”</span> <em>Zenodo</em>, January. <a href="https://doi.org/10.5281/ZENODO.10556597">https://doi.org/10.5281/ZENODO.10556597</a>.
+Wagner, Adina S. 2024. <span>“DataLad: Decrentalized Management of Digital Objects for Open Science.”</span> <em>Zenodo</em>, January. <a href="https://doi.org/10.5281/ZENODO.10556597">https://doi.org/10.5281/ZENODO.10556597</a>.
 </div>
 <div id="ref-wagner2022" class="csl-entry" role="listitem">
 Wagner, Adina S., Laura K. Waite, Kyle Meyer, Marisa K. Heckner, Tobias Kadelka, Niels Reuter, Alexander Q. Waite, et al. 2022. <span>“The DataLad Handbook,”</span> April. <a href="https://doi.org/10.5281/ZENODO.6463273">https://doi.org/10.5281/ZENODO.6463273</a>.
@@ -2367,7 +2390,7 @@ Wagner, Adina S., Laura K. Waite, Kyle Meyer, Marisa K. Heckner, Tobias Kadelka,
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-annotation="1" data-code-lines="5" data-code-cell="annotated-cell-14">Replace <code>&lt;dataset-name&gt;</code> with the name of your dataset, i.e., the name of your dataset folder. In this example, we replace <code>&lt;dataset-name&gt;</code> with <code>neuro-data</code>. The complete command for your example hence looks like this:</span>
+<span data-code-cell="annotated-cell-14" data-code-lines="5" data-code-annotation="1">Replace <code>&lt;dataset-name&gt;</code> with the name of your dataset, i.e., the name of your dataset folder. In this example, we replace <code>&lt;dataset-name&gt;</code> with <code>neuro-data</code>. The complete command for your example hence looks like this:</span>
 </dd>
 </dl>
 </div>
@@ -2388,15 +2411,15 @@ Wagner, Adina S., Laura K. Waite, Kyle Meyer, Marisa K. Heckner, Tobias Kadelka,
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-16" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-annotation="1" data-code-lines="1" data-code-cell="annotated-cell-16">Enter the email address of your ownCloud account.</span>
+<span data-code-cell="annotated-cell-16" data-code-lines="1" data-code-annotation="1">Enter the email address of your ownCloud account.</span>
 </dd>
 <dt data-target-cell="annotated-cell-16" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-annotation="2" data-code-lines="2" data-code-cell="annotated-cell-16">Enter the password of your ownCloud account.</span>
+<span data-code-cell="annotated-cell-16" data-code-lines="2" data-code-annotation="2">Enter the password of your ownCloud account.</span>
 </dd>
 <dt data-target-cell="annotated-cell-16" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-annotation="3" data-code-lines="3" data-code-cell="annotated-cell-16">Repeat the password of your ownCloud account.</span>
+<span data-code-cell="annotated-cell-16" data-code-lines="3" data-code-annotation="3">Repeat the password of your ownCloud account.</span>
 </dd>
 </dl>
 </div>
@@ -2413,7 +2436,7 @@ Wagner, Adina S., Laura K. Waite, Kyle Meyer, Marisa K. Heckner, Tobias Kadelka,
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-18" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-annotation="1" data-code-lines="1" data-code-cell="annotated-cell-18">Use <code>datalad push</code> to push the dataset contents to ownCloud. For details on <code>datalad push</code>, see the <a href="http://docs.datalad.org/en/stable/generated/man/datalad-push.html">command line reference</a> and <a href="https://handbook.datalad.org/en/latest/basics/101-141-push.html">this chapter</a> in the DataLad Handbook.</span>
+<span data-code-cell="annotated-cell-18" data-code-lines="1" data-code-annotation="1">Use <code>datalad push</code> to push the dataset contents to ownCloud. For details on <code>datalad push</code>, see the <a href="http://docs.datalad.org/en/stable/generated/man/datalad-push.html">command line reference</a> and <a href="https://handbook.datalad.org/en/latest/basics/101-141-push.html">this chapter</a> in the DataLad Handbook.</span>
 </dd>
 </dl>
 </div>
