@@ -272,7 +272,7 @@ Single subject epoch (block) auditory fMRI activation data
 ::::: {.columns}
 :::: {.column width="50%"}
 
-::: {.fragment .fade-in-then-semi-out}
+::: {.fragment}
 ::: {layout-ncol=2}
 ![](images/mri.png){width=50%}
 
@@ -280,19 +280,19 @@ Single subject epoch (block) auditory fMRI activation data
 :::
 :::
 
-::: {.fragment .fade-in-then-semi-out}
+::: {.fragment}
 ```{bash}
 #| file: code/create_dataset.sh
 ```
 :::
 
-::: {.fragment .fade-in-then-semi-out}
+::: {.fragment}
 ![[Brain Imaging Data Structure (BIDS)](https://bids.neuroimaging.io/) @gorgolewski2016 ([CC BY 4.0](https://github.com/bids-standard/bids-specification?tab=CC-BY-4.0-1-ov-file#readme))](images/bids-logo.svg){fig-align="center" width=70%}
 :::
 ::::
 :::: {.column width="50%"}
 
-::: {.fragment .fade-in-then-semi-out}
+::: {.fragment}
 ![[Brain Imaging Data Structure (BIDS)](https://bids.neuroimaging.io/) @gorgolewski2016 ([CC BY 4.0](https://www.nature.com/articles/sdata201644#rightslink))](images/bids-overview.png){fig-align="center" width=100%}
 
 ```{bash}
@@ -1271,7 +1271,7 @@ get(ok): README (file) [from gin-src...]
 
 ::::: {.columns}
 :::: {.column width="50%"}
-::: {.fragment .fade-in-then-semi-out}
+::: {.fragment}
 
 ### Science is complex
 
@@ -1281,7 +1281,7 @@ get(ok): README (file) [from gin-src...]
 - Science is collaborative and distributed: We want to share our work and integrate with diverse infrastructure
 
 :::
-::: {.fragment .fade-in-then-semi-out}
+::: {.fragment}
 
 ### DataLad: Decentralized management of digital objects for open science
 
@@ -1293,7 +1293,7 @@ get(ok): README (file) [from gin-src...]
 :::
 ::::
 :::: {.column width="50%"}
-::: {.fragment .fade-in-then-semi-out}
+::: {.fragment}
 ### Develop *everything* like source code
 
 - Code and data *management* using **Git** and **DataLad** (free, open-source command-line tools)
